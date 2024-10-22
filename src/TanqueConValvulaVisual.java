@@ -78,17 +78,24 @@ public class TanqueConValvulaVisual extends JPanel implements ActionListener {
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
         // Coordenadas del tanque
-        int xTanque = 100;
-        int yTanque = 200;
+        int xTanque = 180;
+        int yTanque = 115;
 
         // Dibujar el tanque
         // g2d.setColor(Color.GRAY);
         // g2d.drawRect(xTanque, yTanque, ANCHO_TANQUE, ALTO_TANQUE); // Posición y tamaño del tanque
+        g2d.setColor(Color.LIGHT_GRAY);
+        g2d.fillRect(xTanque, yTanque, ANCHO_TANQUE, ALTO_TANQUE); // Posición y tamaño del tanque
         g2d.setColor(Color.BLACK);
         g2d.setStroke(new BasicStroke(5));
-        g2d.drawLine(xTanque-2, yTanque, xTanque-2, yTanque+302); // Linea Izquierda
+        g2d.drawLine(xTanque-2, yTanque+10, xTanque-2, yTanque+302); // Linea Izquierda
         g2d.drawLine(xTanque+202, yTanque, xTanque+202, yTanque+302); // Linea Derecha
         g2d.drawLine(xTanque-2, yTanque+302, xTanque+202, yTanque+302); // Linea Inferior
+
+        g2d.drawLine(xTanque-2, yTanque, xTanque+202, yTanque); // Linea inferior triangulo
+        g2d.drawLine(xTanque-2, yTanque, xTanque+101, yTanque-50); // Linea izquierda triangulo
+        g2d.drawLine(xTanque+101, yTanque-50, xTanque+202, yTanque); // Linea derecha triangulo
+        
 
 
         // Dibujar la línea horizontal en el medio del tanque
@@ -114,15 +121,15 @@ public class TanqueConValvulaVisual extends JPanel implements ActionListener {
         // Dibujar tuberia
 
         int xTuberia = 10;
-        int yTuberia = 110;
+        int yTuberia = 115;
 
         g2d.setColor(Color.BLACK);
         // Tuberia parte horizontal
-        g2d.drawLine(xTuberia, yTuberia, xTuberia+180, yTuberia);  // Tuberia Línea superior
+        g2d.drawLine(xTuberia, yTuberia, xTuberia+175, yTuberia);  // Tuberia Línea superior
         g2d.drawLine(xTuberia, yTuberia+10, xTuberia+170, yTuberia+10);  // Tuberia Línea inferior
         // Tuberia parte vertical
-        g2d.drawLine(xTuberia+170, yTuberia+10, xTuberia+170, yTuberia+30);  // Tuberia Bajada izquierda
-        g2d.drawLine(xTuberia+180, yTuberia, xTuberia+180, yTuberia+30);  // Tuberia Bajada derecha
+        // g2d.drawLine(xTuberia+170, yTuberia+10, xTuberia+170, yTuberia+30);  // Tuberia Bajada izquierda
+        // g2d.drawLine(xTuberia+180, yTuberia, xTuberia+180, yTuberia+30);  // Tuberia Bajada derecha
 
         // Agua estatica
         int x1Agua = xTuberia;
