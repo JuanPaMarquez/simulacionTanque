@@ -42,10 +42,13 @@ public class TanqueConValvulaVisual extends JPanel implements ActionListener {
 
     private EstadoValvula estadoValvula = EstadoValvula.CERRADA;
 
+    
+    
     // Botón de la válvula
     private JButton botonValvula;
 
     public TanqueConValvulaVisual() {
+        ImagenPanel();
         // Configura el temporizador que controla el llenado/vaciado del tanque
         timer = new Timer(INTERVALO, this);
         timer.start(); // Inicia la animación
@@ -85,7 +88,7 @@ public class TanqueConValvulaVisual extends JPanel implements ActionListener {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2d = (Graphics2D) g;
-        ImagenPanel();
+       
 
         // Antialiasing para mejor calidad visual
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
@@ -134,7 +137,7 @@ public class TanqueConValvulaVisual extends JPanel implements ActionListener {
 
         // Dibujar tuberia
 
-        int xTuberia = 10;
+        int xTuberia = 50;
         int yTuberia = 115;
 
         g2d.setColor(Color.BLACK);
@@ -144,8 +147,13 @@ public class TanqueConValvulaVisual extends JPanel implements ActionListener {
         // Tuberia parte vertical
         // g2d.drawLine(xTuberia+170, yTuberia+10, xTuberia+170, yTuberia+30);  // Tuberia Bajada izquierda
         // g2d.drawLine(xTuberia+180, yTuberia, xTuberia+180, yTuberia+30);  // Tuberia Bajada derecha
-        g2d.drawImage(imagenValvulaC, xTanque+200, yTanque, 50, 50, this);
-        g2d.drawImage(imagenValvulaA, xTanque+250, yTanque, 50, 50, this);
+        if (estadoValvula == EstadoValvula.ABIERTA) {
+            g2d.drawImage(imagenValvulaA, xTuberia-10, yTuberia-30, 50, 50, this);
+        }else{
+            g2d.drawImage(imagenValvulaC, xTuberia-10, yTuberia-30, 50, 50, this);
+        }
+       
+       // g2d.drawImage(imagenValvulaA, xTanque+250, yTanque, 50, 50, this);
 
         // Agua estatica
         int x1Agua = xTuberia;
@@ -165,7 +173,11 @@ public class TanqueConValvulaVisual extends JPanel implements ActionListener {
 
         // tuberia.drawRect(10, 60, 60, 80);  
         // tuberia.fillRect(10, 10, 30, 30); 
-
+        if (estadoValvula == EstadoValvula.ABIERTA) {
+            g2d.drawImage(imagenValvulaA, xTuberia-10, yTuberia-30, 50, 50, this);
+        }else{
+            g2d.drawImage(imagenValvulaC, xTuberia-10, yTuberia-30, 50, 50, this);
+        }
 
     }
 
@@ -213,6 +225,7 @@ public class TanqueConValvulaVisual extends JPanel implements ActionListener {
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
+
             public void run() {
                 JFrame frame = new JFrame("Simulación de Tanque con Válvula y Casita");
                 TanqueConValvulaVisual panel = new TanqueConValvulaVisual();
