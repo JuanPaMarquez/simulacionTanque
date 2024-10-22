@@ -117,11 +117,35 @@ public class TanqueConValvulaVisual extends JPanel implements ActionListener {
         this.add(botonValvula);
     }
 
+    protected void paintComponentcuadricula(Graphics g1) {
+        super.paintComponent(g1); // Llama a la implementación del padre para pintar el fondo correctamente
+
+        // Definir el ancho y el alto de las celdas de la cuadrícula
+        int anchoCelda = 50;
+        int altoCelda = 50;
+
+        // Definir el color de la cuadrícula
+        g1.setColor(Color.LIGHT_GRAY);
+
+        // Obtener el ancho y alto del panel
+        int anchoPanel = getWidth();
+        int altoPanel = getHeight();
+
+        // Dibujar líneas verticales
+        for (int x = 0; x < anchoPanel; x += anchoCelda) {
+            g1.drawLine(x, 0, x, altoPanel);
+        }
+
+        // Dibujar líneas horizontales
+        for (int y = 0; y < altoPanel; y += altoCelda) {
+            g1.drawLine(0, y, anchoPanel, y);
+        }
+    }
+
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2d = (Graphics2D) g;
-        
 
         // Antialiasing para mejor calidad visual
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
@@ -252,7 +276,7 @@ public class TanqueConValvulaVisual extends JPanel implements ActionListener {
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-                
+
                 JFrame frame = new JFrame("Simulación de Tanque con Válvula y Casita");
                 TanqueConValvulaVisual panel = new TanqueConValvulaVisual();
                 frame.add(panel);
