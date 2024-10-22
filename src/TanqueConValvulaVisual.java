@@ -1,5 +1,6 @@
 import javax.swing.*;
-import javax.swing.border.Border;
+
+import opciones.paneldeOpciones;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -29,37 +30,6 @@ public class TanqueConValvulaVisual extends JPanel implements ActionListener {
     private Image imagenValvulaC;
     private Image imagenValvulaA;
 
-    public void menu() {
-        JPanel panelmenu = new JPanel();
-        Border borde = BorderFactory.createLineBorder(Color.BLACK, 2);
-
-        panelmenu.setBounds(550, 50, 200, 80);
-        JButton botonInicio = new JButton("Inicio");
-        JButton botonFinalizar = new JButton("Finalizar");
-        JCheckBox automatizado = new JCheckBox("Autimatico");
-        JCheckBox manual = new JCheckBox("Manual");
-
-        automatizado.setBounds(20, 50, 70, 20);
-        automatizado.setFocusable(false);
-        manual.setBounds(90, 50, 60, 20);
-        manual.setFocusable(false);
-
-        botonInicio.setBounds(10, 10, 80, 20);
-        botonInicio.setFocusable(false);
-        botonFinalizar.setBounds(10, 40, 80, 20);
-        botonFinalizar.setFocusable(false);
-
-        panelmenu.setBackground(new Color(0xD3D3D3));
-
-        panelmenu.add(botonInicio);
-        panelmenu.add(botonFinalizar);
-        panelmenu.add(automatizado);
-        panelmenu.add(manual);
-
-        panelmenu.setBorder(borde);
-        this.add(panelmenu);
-    }
-
     public void ImagenPanel() {
         // Cargar la imagen usando ImageIcon
         ImageIcon valvulaC = new ImageIcon("src/public/valvulaCerrada.png");
@@ -82,7 +52,8 @@ public class TanqueConValvulaVisual extends JPanel implements ActionListener {
     public TanqueConValvulaVisual() {
         // Configura el temporizador que controla el llenado/vaciado del tanque
         ImagenPanel();
-        menu();
+        paneldeOpciones llamar = new paneldeOpciones();
+        this.add(llamar.menu());
         timer = new Timer(INTERVALO, this);
         timer.start(); // Inicia la animación
 
