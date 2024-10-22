@@ -23,13 +23,16 @@ public class TanqueConValvulaVisual extends JPanel implements ActionListener {
     // Temporizador para controlar el llenado/vaciado del tanque
     private Timer timer;
 
-    private Image imagenValvula;
+    private Image imagenValvulaC;
+    private Image imagenValvulaA;
 
     public void ImagenPanel() {
         // Cargar la imagen usando ImageIcon
         ImageIcon valvulaC = new ImageIcon("src/public/valvulaCerrada.png");
+        ImageIcon valvulaA = new ImageIcon("src/public/valvulaAbierta.png");
         // ImageIcon valvulaO = new ImageIcon("public/tanqueAbierta.png");
-        imagenValvula = valvulaC.getImage(); // Obtener el objeto Image
+        imagenValvulaC = valvulaC.getImage(); // Obtener el objeto Image
+        imagenValvulaA = valvulaA.getImage(); // Obtener el objeto Image
     }
 
     // Estados de la válvula
@@ -141,7 +144,8 @@ public class TanqueConValvulaVisual extends JPanel implements ActionListener {
         // Tuberia parte vertical
         // g2d.drawLine(xTuberia+170, yTuberia+10, xTuberia+170, yTuberia+30);  // Tuberia Bajada izquierda
         // g2d.drawLine(xTuberia+180, yTuberia, xTuberia+180, yTuberia+30);  // Tuberia Bajada derecha
-        g2d.drawImage(imagenValvula, xTanque-2, yTanque, 50, 50, this);
+        g2d.drawImage(imagenValvulaC, xTanque+200, yTanque, 50, 50, this);
+        g2d.drawImage(imagenValvulaA, xTanque+250, yTanque, 50, 50, this);
 
         // Agua estatica
         int x1Agua = xTuberia;
