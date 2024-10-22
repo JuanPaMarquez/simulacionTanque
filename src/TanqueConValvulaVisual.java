@@ -94,7 +94,11 @@ public class TanqueConValvulaVisual extends JPanel implements ActionListener {
         // Dibujar el tanque
         // g2d.setColor(Color.GRAY);
         // g2d.drawRect(xTanque, yTanque, ANCHO_TANQUE, ALTO_TANQUE); // Posición y tamaño del tanque
+        // Coordenadas de los vértices del triángulo
+        int[] xTriangulo = {xTanque-2, xTanque+101, xTanque+202}; // Coordenadas X de los puntos del triángulo
+        int[] yTriangulo = {yTanque, yTanque-50,yTanque}; // Coordenadas Y de los puntos del triángulo
         g2d.setColor(Color.LIGHT_GRAY);
+        g2d.fillPolygon(xTriangulo, yTriangulo, 3);
         g2d.fillRect(xTanque, yTanque, ANCHO_TANQUE, ALTO_TANQUE); // Posición y tamaño del tanque
         g2d.setColor(Color.BLACK);
         g2d.setStroke(new BasicStroke(5));
@@ -102,12 +106,8 @@ public class TanqueConValvulaVisual extends JPanel implements ActionListener {
         g2d.drawLine(xTanque+202, yTanque, xTanque+202, yTanque+302); // Linea Derecha
         g2d.drawLine(xTanque-2, yTanque+302, xTanque+202, yTanque+302); // Linea Inferior
 
-        g2d.drawLine(xTanque-2, yTanque, xTanque+202, yTanque); // Linea inferior triangulo
-        g2d.drawLine(xTanque-2, yTanque, xTanque+101, yTanque-50); // Linea izquierda triangulo
-        g2d.drawLine(xTanque+101, yTanque-50, xTanque+202, yTanque); // Linea derecha triangulo
 
-        
-
+        g2d.drawPolygon(xTriangulo, yTriangulo, 3);
 
         // Dibujar la línea horizontal en el medio del tanque
         // g2d.setColor(Color.BLACK);
