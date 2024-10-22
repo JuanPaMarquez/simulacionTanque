@@ -23,6 +23,15 @@ public class TanqueConValvulaVisual extends JPanel implements ActionListener {
     // Temporizador para controlar el llenado/vaciado del tanque
     private Timer timer;
 
+    private Image imagenValvula;
+
+    public void ImagenPanel() {
+        // Cargar la imagen usando ImageIcon
+        ImageIcon valvulaC = new ImageIcon("src/public/valvulaCerrada.png");
+        // ImageIcon valvulaO = new ImageIcon("public/tanqueAbierta.png");
+        imagenValvula = valvulaC.getImage(); // Obtener el objeto Image
+    }
+
     // Estados de la válvula
     private enum EstadoValvula {
         ABIERTA, CERRADA
@@ -73,6 +82,7 @@ public class TanqueConValvulaVisual extends JPanel implements ActionListener {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2d = (Graphics2D) g;
+        ImagenPanel();
 
         // Antialiasing para mejor calidad visual
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
@@ -95,6 +105,7 @@ public class TanqueConValvulaVisual extends JPanel implements ActionListener {
         g2d.drawLine(xTanque-2, yTanque, xTanque+202, yTanque); // Linea inferior triangulo
         g2d.drawLine(xTanque-2, yTanque, xTanque+101, yTanque-50); // Linea izquierda triangulo
         g2d.drawLine(xTanque+101, yTanque-50, xTanque+202, yTanque); // Linea derecha triangulo
+
         
 
 
@@ -130,6 +141,7 @@ public class TanqueConValvulaVisual extends JPanel implements ActionListener {
         // Tuberia parte vertical
         // g2d.drawLine(xTuberia+170, yTuberia+10, xTuberia+170, yTuberia+30);  // Tuberia Bajada izquierda
         // g2d.drawLine(xTuberia+180, yTuberia, xTuberia+180, yTuberia+30);  // Tuberia Bajada derecha
+        g2d.drawImage(imagenValvula, xTanque-2, yTanque, 50, 50, this);
 
         // Agua estatica
         int x1Agua = xTuberia;
