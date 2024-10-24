@@ -50,6 +50,7 @@ public class TanqueConValvulaVisual extends JPanel implements ActionListener {
     public TanqueConValvulaVisual() {
         ImagenPanel();
         // Configura el temporizador que controla el llenado/vaciado del tanque
+        ImagenPanel();
         timer = new Timer(INTERVALO, this);
         timer.start(); // Inicia la animación
 
@@ -88,7 +89,7 @@ public class TanqueConValvulaVisual extends JPanel implements ActionListener {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2d = (Graphics2D) g;
-       
+        ImagenPanel();
 
         // Antialiasing para mejor calidad visual
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
