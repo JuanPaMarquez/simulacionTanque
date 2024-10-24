@@ -16,7 +16,9 @@ public class TanqueConValvulaVisual extends JPanel implements ActionListener {
     // Nivel de agua en porcentaje
     private int nivelAgua = 0;
     private int aguaH = 0;
+    private int vacioAguaH = 0;
     private int aguaV = 0;
+    private int vacioAguaV = 0;
     private int posicionAgua;
     private int caidaAgua;
 
@@ -88,7 +90,7 @@ public class TanqueConValvulaVisual extends JPanel implements ActionListener {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Cambiar el estado de la válvula cuando se presiona el botón
-              
+               
                 switch (estadoValvula) {
                     case ABIERTA:
                         estadoValvula = EstadoValvula.CERRADA;
@@ -99,6 +101,10 @@ public class TanqueConValvulaVisual extends JPanel implements ActionListener {
                     //     botonValvula.setText("Abrir Válvula");
                     //     break;
                     case CERRADA:
+                    aguaH = 0;
+                    vacioAguaH = 0;
+                    aguaV = 0;
+                    vacioAguaV = 0;
                         estadoValvula = EstadoValvula.ABIERTA;
                        // botonValvula.setText("Abrir Válvula");
                         break;
@@ -198,15 +204,23 @@ public class TanqueConValvulaVisual extends JPanel implements ActionListener {
 
         g2d.setColor(Color.BLUE);
         g2d.drawLine(x1Agua, y1Agua, 70, y2Agua);
+       if (!(vacioAguaH==aguaH && estadoValvula == EstadoValvula.CERRADA)) {
         g2d.setColor(Color.BLUE);
-        g2d.drawLine(x2Agua, y1Agua, x2Agua+aguaH, y2Agua); 
+        g2d.drawLine(x2Agua+vacioAguaH, y1Agua, x2Agua+aguaH, y2Agua); 
+       }
+       
 
 
         // Agua Vertical
 
         if (aguaH==82) {
+            g2d.setColor(Color.BLUE);
             caidaAgua = y2Agua+aguaV;
-            g2d.drawLine(x2Agua+aguaH, y2Agua, x2Agua+aguaH, caidaAgua);  
+            if (!(vacioAguaV==aguaV && estadoValvula == EstadoValvula.CERRADA)) {
+               
+                g2d.drawLine(x2Agua+aguaH, y2Agua+vacioAguaV, x2Agua+aguaH, caidaAgua);  
+               }
+          
         }
 
         // tuberia.drawRect(10, 60, 60, 80);  
@@ -242,13 +256,14 @@ public class TanqueConValvulaVisual extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
 
         if (estadoValvula == EstadoValvula.ABIERTA) {
+
         if (aguaH<82) {
             aguaH++;
         } else if (caidaAgua<posicionAgua-2) {
             aguaV++;
         } else if (nivelAgua < 1000) {
 
-           System.out.println("llenado"+estadoValvula);
+          // System.out.println("llenado"+estadoValvula);
            
 
                 nivelAgua++;
@@ -256,6 +271,16 @@ public class TanqueConValvulaVisual extends JPanel implements ActionListener {
         }
            
 
+        }else{
+            if (vacioAguaH < (aguaH)  ) {
+
+                vacioAguaH++;
+            } else if (vacioAguaV < aguaV ) {
+               
+              
+                    vacioAguaV++;
+                
+            } 
         }
         // Controlar el llenado o vaciado según el estado de la válvula
         
