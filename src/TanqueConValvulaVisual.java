@@ -1,10 +1,14 @@
 import javax.swing.*;
 
+import com.sun.tools.javac.Main;
+
+import opciones.RoundedButton;
 import opciones.paneldeOpciones;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseEvent;
 
@@ -393,7 +397,7 @@ j++;
             aguaH++;
         } else if (caidaAgua < posicionAgua - 2) {
             aguaV++;
-        } else if (nivelAgua < 1000) {
+        } else if (nivelAgua < 990) {
 
           // System.out.println("llenado"+estadoValvula);
            
@@ -431,9 +435,13 @@ j++;
         repaint(); // Redibujar el tanque con el nuevo nivel de agua
     }
 
+  
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
 
+                SwingUtilities.invokeLater(new Runnable() {
+   // Variables de posición para el arrastre de la ventana
+   int posX = 0;
+   int posY = 0;
             public void run() {
 
                 JFrame frame = new JFrame("Simulación de Tanque con Válvula y Casita");
@@ -443,7 +451,60 @@ j++;
                 frame.setSize(800, 600); // Aumentar el tamaño para acomodar la tubería y la casa
                 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 frame.setLocationRelativeTo(null); // Centrar la ventana
+                frame.setUndecorated(true);
+
+
+                // Crear un panel para actuar como barra de título personalizada
+        JPanel barraTitulo = new JPanel();
+        barraTitulo.setBackground(new Color(44, 62, 80));
+        barraTitulo.setPreferredSize(new Dimension(400, 40));
+        barraTitulo.setLayout(new BorderLayout());
+
+        // Crear botones para minimizar, maximizar y cerrar
+        RoundedButton btnMinimizar = new RoundedButton("_",frame ,true);
+        
+
+        RoundedButton btnCerrar = new RoundedButton("X",frame,false);
+        JLabel title = new JLabel("   Simulación de Tanque con Válvula y Casita"); 
+        title.setForeground(Color.WHITE);
+       
+        title.setFont(new Font("times new roman", Font.BOLD, 20));
+        // Acción del botón Cerrar
+       
+
+             // Añadir botones a la barra de título personalizada
+             barraTitulo.add(title,BorderLayout.WEST);
+         // Crear un panel para los botones
+        JPanel panelBotones = new JPanel();
+        panelBotones.setBounds(0,0,120,30);
+        panelBotones.setBackground(new Color(44, 62, 80));
+        panelBotones.setLayout(new FlowLayout(FlowLayout.RIGHT));   
+        panelBotones.add(btnMinimizar);
+        panelBotones.add(btnCerrar);
+
+         barraTitulo.add(panelBotones,BorderLayout.EAST);  
+         // Añadir el panel de barra de título al JFrame
+         frame.add(barraTitulo, BorderLayout.NORTH);
+
+         // Hacer la barra de título arrastrable para mover la ventana
+         barraTitulo.addMouseListener(new MouseAdapter() {
+             @Override
+             public void mousePressed(MouseEvent e) {
+                posX = e.getX();
+                 posY = e.getY();
+             }
+         });
+         
+         barraTitulo.addMouseMotionListener(new MouseAdapter() {
+             @Override
+             public void mouseDragged(MouseEvent e) {
+                frame.setLocation(e.getXOnScreen() - posX, e.getYOnScreen() - posY);
+             }
+         });
                 frame.setVisible(true);
+
+
+
             }
         });
     }
