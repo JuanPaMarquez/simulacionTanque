@@ -32,6 +32,7 @@ public class TanqueConValvulaVisual extends JPanel implements ActionListener {
     private Timer timer;
     private ImageIcon valvulaC ;
     private ImageIcon valvulaA ;
+    private ImageIcon casaImg ;
   
     //dimensiones de tuberia 
     private int xTuberia = 20;
@@ -47,6 +48,7 @@ public class TanqueConValvulaVisual extends JPanel implements ActionListener {
         // ImageIcon valvulaO = new ImageIcon("public/tanqueAbierta.png");
         valvulaC = new ImageIcon("src/public/valvulaCerrada.png");
         valvulaA =new ImageIcon("src/public/valvulaAbierta.png");
+        casaImg = new ImageIcon("src/public/house.png");
     
     }
 
@@ -196,14 +198,17 @@ public class TanqueConValvulaVisual extends JPanel implements ActionListener {
         botonValvulaTanque.setContentAreaFilled(false);
         this.add(botonValvulaCasa);
         this.add(botonValvulaTanque);
+
+
+
     }
 
     protected void paintComponentcuadricula(Graphics g1) {
         super.paintComponent(g1); // Llama a la implementación del padre para pintar el fondo correctamente
 
         // Definir el ancho y el alto de las celdas de la cuadrícula
-        int anchoCelda = 50;
-        int altoCelda = 50;
+        int anchoCelda = 10;
+        int altoCelda = 10;
 
         // Definir el color de la cuadrícula
         g1.setColor(Color.LIGHT_GRAY);
@@ -213,21 +218,40 @@ public class TanqueConValvulaVisual extends JPanel implements ActionListener {
         int altoPanel = getHeight();
 
         // Dibujar líneas verticales
+        int j=0;
         for (int x = 0; x < anchoPanel; x += anchoCelda) {
+        if ( j%5 ==0 ) {
+            g1.setColor(Color.BLACK);
+            g1.drawLine(x, 0, x, altoPanel);
+        }else{
+            g1.setColor(Color.LIGHT_GRAY);
             g1.drawLine(x, 0, x, altoPanel);
         }
-
+           
+j++;
+        }
+        j=0;
         // Dibujar líneas horizontales
         for (int y = 0; y < altoPanel; y += altoCelda) {
+            if ( j%5 ==0 ) {
+                g1.setColor(Color.BLACK);
+               
+            }else{
+                g1.setColor(Color.LIGHT_GRAY);
+                
+            }
             g1.drawLine(0, y, anchoPanel, y);
+            j++;
         }
 
     }
 
     @Override
     protected void paintComponent(Graphics g) {
+        paintComponentcuadricula(g);
         super.paintComponent(g);
         Graphics2D g2d = (Graphics2D) g;
+        paintComponentcuadricula(g2d);
 
         // Antialiasing para mejor calidad visual
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
@@ -334,7 +358,9 @@ public class TanqueConValvulaVisual extends JPanel implements ActionListener {
              g2d.drawImage(this.valvulaC.getImage(), xTuberia+40, yTuberia-30, 50, 50, this);
         }
 
+        g2d.drawImage(this.casaImg.getImage(),500, 350, 180, 150, this);
 
+     
     }
 
     /**
