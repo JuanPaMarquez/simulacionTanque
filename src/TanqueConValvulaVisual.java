@@ -10,6 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseListener;
+import java.text.DecimalFormat;
 import java.awt.event.MouseEvent;
 
 /**
@@ -24,7 +25,7 @@ public class TanqueConValvulaVisual extends JPanel implements ActionListener {
     private static final int INTERVALO = 10; // Intervalo de tiempo en milisegundos
 
     // Nivel de agua en porcentaje
-    private int nivelAgua = 0;
+    private double nivelAgua = 0;
     private int aguaH = 0;
     private int vacioAguaH = 0;
     private int aguaV = 0;
@@ -295,7 +296,8 @@ j++;
 
         // Dibujar el porcentaje del nivel de agua
         g2d.setColor(Color.BLACK);
-        g2d.drawString("Nivel: " + (nivelAgua / 10) + "%", xTanque + 50, yTanque + ALTO_TANQUE + 30); // Texto debajo
+        DecimalFormat df = new DecimalFormat("#.00");
+        g2d.drawString("Nivel: " + df.format((nivelAgua / 10) )+ "%", xTanque + 50, yTanque + ALTO_TANQUE + 30); // Texto debajo
                                                                                                       // del tanque
 
         // Dibujar la tubería
@@ -344,7 +346,7 @@ j++;
 
         // Agua Vertical
 
-        if (aguaH==82) {
+        if (aguaH>=82) {
             g2d.setColor(Color.BLUE);
             caidaAgua = y2Agua+aguaV;
             if (!(vacioAguaV==aguaV && estadoValvulaTanque == EstadoValvulaTanque.CERRADA)) {
@@ -394,15 +396,16 @@ j++;
 
         if (aguaH<82) {
 
-            aguaH++;
+            aguaH=aguaH+3;
         } else if (caidaAgua < posicionAgua - 2) {
-            aguaV++;
+            aguaV=aguaV+3;
         } else if (nivelAgua < 990) {
 
           // System.out.println("llenado"+estadoValvula);
            
 
-                nivelAgua++;
+                nivelAgua=nivelAgua+0.4;//variable de control
+
             
         }
            
@@ -410,11 +413,11 @@ j++;
         }else{
             if (vacioAguaH < (aguaH)  ) {
 
-                vacioAguaH++;
+                vacioAguaH=vacioAguaH+3;
             } else if (vacioAguaV < aguaV ) {
                
               
-                    vacioAguaV++;
+                    vacioAguaV=vacioAguaV+3;
                 
             } 
         }
