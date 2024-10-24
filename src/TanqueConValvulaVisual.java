@@ -5,6 +5,8 @@ import opciones.paneldeOpciones;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseEvent;
 
 /**
  * Simulación visual de un tanque con una válvula de tres estados y una tubería
@@ -39,15 +41,25 @@ public class TanqueConValvulaVisual extends JPanel implements ActionListener {
         imagenValvulaA = valvulaA.getImage(); // Obtener el objeto Image
     }
 
-    // Estados de la válvula
-    private enum EstadoValvula {
+    // Estados de la válvula de la Casa
+    private enum EstadoValvulaCasa {
         ABIERTA, CERRADA
     }
 
-    private EstadoValvula estadoValvulaCasa = EstadoValvula.CERRADA;
+    private EstadoValvulaCasa estadoValvulaCasa = EstadoValvulaCasa.CERRADA;
 
-    // Botón de la válvula
+    // Estados de la valcula del tanque
+    private enum EstadoValvulaTanque {
+        ABIERTA, CERRADA
+    }
+
+    private EstadoValvulaTanque estadoValvulaTanque = EstadoValvulaTanque.CERRADA;
+
+    // Botón de la válvula Casa
     private JButton botonValvulaCasa;
+
+    // Boton de la valvula del tanque
+    private JButton botonValvulaTanque;
 
     public TanqueConValvulaVisual() {
         // Configura el temporizador que controla el llenado/vaciado del tanque
@@ -67,26 +79,73 @@ public class TanqueConValvulaVisual extends JPanel implements ActionListener {
                 // Cambiar el estado de la válvula cuando se presiona el botón
                 switch (estadoValvulaCasa) {
                     case ABIERTA:
-                        estadoValvulaCasa = EstadoValvula.CERRADA;
-                        botonValvulaCasa.setText("Cerrar Valvula");
+                        estadoValvulaCasa = EstadoValvulaCasa.CERRADA;
+                        botonValvulaCasa.setText("Cerrar Válvula");
                         break;
                     // case MEDIO_ABIERTA:
                     // estadoValvula = EstadoValvula.CERRADA;
                     // botonValvula.setText("Abrir Válvula");
                     // break;
                     case CERRADA:
-                        estadoValvulaCasa = EstadoValvula.ABIERTA;
+                        estadoValvulaCasa = EstadoValvulaCasa.ABIERTA;
                         botonValvulaCasa.setText("Abrir Válvula");
                         break;
                 }
             }
         });
 
+        botonValvulaTanque = new JButton("Cerrar Válvula");
+        botonValvulaTanque.setFocusable(false);
+        botonValvulaTanque.setForeground(Color.BLACK);
+        botonValvulaTanque.setBorder(BorderFactory.createLineBorder(Color.BLACK, 3));
+        botonValvulaTanque.setMargin(new Insets(10, 10, 10, 10));
+        botonValvulaTanque.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                switch (estadoValvulaTanque) {
+                    case ABIERTA:
+                        estadoValvulaTanque = EstadoValvulaTanque.CERRADA;
+                        botonValvulaTanque.setText("Cerrar Válvula");
+                        break;
+                    // case MEDIO_ABIERTA:
+                    // estadoValvula = EstadoValvula.CERRADA;
+                    // botonValvula.setText("Abrir Válvula");
+                    // break;
+                    case CERRADA:
+                        estadoValvulaTanque = EstadoValvulaTanque.ABIERTA;
+                        botonValvulaTanque.setText("Abrir Válvula");
+                        break;
+                }
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                botonValvulaTanque.setBackground(new Color(0x2ff238));
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                botonValvulaTanque.setBackground(Color.WHITE);
+            }
+
+        });
+
         // Configura el layout absoluto
         this.setLayout(null);
         // Añadir el botón al panel y establecer su posición fija
         botonValvulaCasa.setBounds(400, 400, 140, 30); // Posición fija en la esquina superior izquierda
+        botonValvulaTanque.setBounds(40, 30, 120, 30);
         this.add(botonValvulaCasa);
+        this.add(botonValvulaTanque);
     }
 
     protected void paintComponentcuadricula(Graphics g1) {
