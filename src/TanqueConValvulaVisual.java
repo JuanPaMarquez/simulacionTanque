@@ -44,10 +44,10 @@ public class TanqueConValvulaVisual extends JPanel implements ActionListener {
         ABIERTA, CERRADA
     }
 
-    private EstadoValvula estadoValvula = EstadoValvula.CERRADA;
+    private EstadoValvula estadoValvulaCasa = EstadoValvula.CERRADA;
 
     // Botón de la válvula
-    private JButton botonValvula;
+    private JButton botonValvulaCasa;
 
     public TanqueConValvulaVisual() {
         // Configura el temporizador que controla el llenado/vaciado del tanque
@@ -58,24 +58,25 @@ public class TanqueConValvulaVisual extends JPanel implements ActionListener {
         timer.start(); // Inicia la animación
 
         // Configura el botón de la válvula
-        botonValvula = new JButton("Cerrar Válvula"); // Estado inicial: ABIERTA // Reducir márgenes para mejor ajuste
-        botonValvula.setFocusable(false); // Evitar que el botón tome el foco
-        botonValvula.addActionListener(new ActionListener() {
+        botonValvulaCasa = new JButton("Cerrar Válvula"); // Estado inicial: ABIERTA // Reducir márgenes para mejor
+                                                          // ajuste
+        botonValvulaCasa.setFocusable(false); // Evitar que el botón tome el foco
+        botonValvulaCasa.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Cambiar el estado de la válvula cuando se presiona el botón
-                switch (estadoValvula) {
+                switch (estadoValvulaCasa) {
                     case ABIERTA:
-                        estadoValvula = EstadoValvula.CERRADA;
-                        botonValvula.setText("Cerrar Valvula");
+                        estadoValvulaCasa = EstadoValvula.CERRADA;
+                        botonValvulaCasa.setText("Cerrar Valvula");
                         break;
                     // case MEDIO_ABIERTA:
                     // estadoValvula = EstadoValvula.CERRADA;
                     // botonValvula.setText("Abrir Válvula");
                     // break;
                     case CERRADA:
-                        estadoValvula = EstadoValvula.ABIERTA;
-                        botonValvula.setText("Abrir Válvula");
+                        estadoValvulaCasa = EstadoValvula.ABIERTA;
+                        botonValvulaCasa.setText("Abrir Válvula");
                         break;
                 }
             }
@@ -84,8 +85,8 @@ public class TanqueConValvulaVisual extends JPanel implements ActionListener {
         // Configura el layout absoluto
         this.setLayout(null);
         // Añadir el botón al panel y establecer su posición fija
-        botonValvula.setBounds(400, 400, 140, 30); // Posición fija en la esquina superior izquierda
-        this.add(botonValvula);
+        botonValvulaCasa.setBounds(400, 400, 140, 30); // Posición fija en la esquina superior izquierda
+        this.add(botonValvulaCasa);
     }
 
     protected void paintComponentcuadricula(Graphics g1) {
@@ -231,7 +232,7 @@ public class TanqueConValvulaVisual extends JPanel implements ActionListener {
             nivelAgua++;
         }
         // Controlar el llenado o vaciado según el estado de la válvula
-        switch (estadoValvula) {
+        switch (estadoValvulaCasa) {
             case ABIERTA:
                 if (nivelAgua > 0) {
                     nivelAgua--; // Llenar el tanque
@@ -250,6 +251,7 @@ public class TanqueConValvulaVisual extends JPanel implements ActionListener {
 
                 JFrame frame = new JFrame("Simulación de Tanque con Válvula y Casita");
                 TanqueConValvulaVisual panel = new TanqueConValvulaVisual();
+                panel.setBackground(new Color(0xd4ebb2));
                 frame.add(panel);
                 frame.setSize(800, 600); // Aumentar el tamaño para acomodar la tubería y la casa
                 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
