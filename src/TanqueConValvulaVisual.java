@@ -52,7 +52,7 @@ public class TanqueConValvulaVisual extends JPanel implements ActionListener {
         // ImageIcon valvulaO = new ImageIcon("public/tanqueAbierta.png");
         valvulaC = new ImageIcon("src/public/valvulaCerrada.png");
         valvulaA = new ImageIcon("src/public/valvulaAbierta.png");
-        casaImg = new ImageIcon("src/public/house.png");
+        casaImg = new ImageIcon("src/public/casa2removebg.png");
 
     }
 
@@ -333,7 +333,7 @@ public class TanqueConValvulaVisual extends JPanel implements ActionListener {
             g2d.drawImage(this.valvulaC.getImage(), xTuberia + 40, yTuberia - 30, 50, 50, this);
         }
 
-        g2d.drawImage(this.casaImg.getImage(), 500, 350, 180, 150, this);
+        g2d.drawImage(this.casaImg.getImage(), 500, 350, 220, 150, this);
 
     }
 
