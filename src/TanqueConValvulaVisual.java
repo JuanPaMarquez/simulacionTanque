@@ -70,6 +70,7 @@ public class TanqueConValvulaVisual extends JPanel implements ActionListener {
     }
 
     private EstadoValvulaTanque estadoValvulaTanque = EstadoValvulaTanque.ABIERTA;
+  
 
     // Botón de la válvula Casa
     private JButton botonValvulaCasa;
@@ -333,7 +334,7 @@ public class TanqueConValvulaVisual extends JPanel implements ActionListener {
             g2d.drawImage(this.valvulaC.getImage(), xTuberia + 40, yTuberia - 30, 50, 50, this);
         }
 
-        g2d.drawImage(this.casaImg.getImage(), 500, 350, 180, 150, this);
+        g2d.drawImage(this.casaImg.getImage(), 550, 380, 180, 150, this);
 
     }
 
@@ -341,19 +342,39 @@ public class TanqueConValvulaVisual extends JPanel implements ActionListener {
      * Método para dibujar la tubería desde la base del tanque hasta la casita.
      */
     private void dibujarTuberia(Graphics2D g2d, int xTanque, int yTanque, int anchoTanque, int altoTanque) {
-        g2d.setColor(Color.DARK_GRAY);
-        g2d.setStroke(new BasicStroke(5));
-
         // Coordenadas iniciales (base del tanque)
-        int xInicio = xTanque + anchoTanque;
-        int yInicio = yTanque + altoTanque;
+        int xInicio = xTanque + anchoTanque+2;
+        int yInicio = yTanque + altoTanque-8;
 
         // Coordenadas finales (entrada de la casa)
         int xFinal = xInicio + 100; // 100 píxeles a la derecha
         int yFinal = yInicio + 50; // 50 píxeles hacia abajo
 
+        g2d.setColor(Color.BLACK);
+        // Tuberia parte horizontal
+        g2d.setStroke(new BasicStroke(5));
+
+        g2d.drawLine(xInicio, yInicio, xInicio+ 50, yInicio); // Tuberia Línea superior
+        g2d.drawLine(xInicio, yInicio + 10, xInicio + 50, yInicio+10 ); // Tuberia Línea inferior
+
+        
+        g2d.drawLine(xInicio+100, yInicio, xFinal + 50, yInicio); // Tuberia Línea superior
+        g2d.drawLine(xInicio+100, yInicio + 10, xFinal + 50, yInicio+10 ); // Tuberia Línea inferior
+
+        // Tuberia parte horizontal
+       // g2d.drawLine(xTuberia + 80, yTuberia, xTuberia + 163, yTuberia); // Tuberia Línea superior
+      //  g2d.drawLine(xTuberia + 80, yTuberia + 10, xTuberia + 158, yTuberia + 10); // Tuberia Línea inferior
+      if (estadoValvulaCasa == EstadoValvulaCasa.ABIERTA) {
+        g2d.drawImage(this.valvulaA.getImage(), xInicio + 50, yInicio - 30, 50, 50, this);
+    } else {
+        g2d.drawImage(this.valvulaC.getImage(),  xInicio + 50, yInicio - 30, 50, 50, this);
+    }
+       
+
+
+
         // Dibujar una línea recta que representa la tubería
-        g2d.drawLine(xInicio, yInicio, xFinal, yFinal);
+       // g2d.drawLine(xInicio, yInicio, xFinal, yFinal);
     }
 
     @Override
