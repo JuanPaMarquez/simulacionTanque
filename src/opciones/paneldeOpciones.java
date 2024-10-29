@@ -5,9 +5,6 @@ import java.awt.*;
 import javax.swing.border.Border;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import principal.TanqueConValvulaVisual;
-// import java.awt.event.ActionListener;
-// import java.awt.event.ActionEvent;
 
 public class paneldeOpciones extends JPanel {
 
@@ -48,8 +45,6 @@ public class paneldeOpciones extends JPanel {
                 botonInicio.setBackground(new Color(0x0cf204));
                 botonFinalizar.setBackground(new Color(0x6598a4));
                 botonInicio.setSelected(true);
-                TanqueConValvulaVisual llamar1 = new TanqueConValvulaVisual();
-                llamar1.paintComponents(getGraphics());
             }
 
             @Override
@@ -95,17 +90,6 @@ public class paneldeOpciones extends JPanel {
             public void mouseExited(MouseEvent e) {
             }
         };
-        // ActionListener ListeneButtonInicio = new ActionListener() {
-        // @Override
-        // public void actionPerformed(ActionEvent e) {
-        // if (botonInicio.isSelected()) {
-        // botonFinalizar.setBackground(new Color(0x6598a4));
-        // }
-        // if (botonFinalizar.isSelected()) {
-        // botonInicio.setBackground(new Color(0x6598a4));
-        // }
-        // }
-        // };
 
         // ! Diseño de los Button
         // ? Diseño del Boton Iniciar
@@ -113,14 +97,12 @@ public class paneldeOpciones extends JPanel {
         botonInicio.setForeground(Color.BLACK);
         botonInicio.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
         botonInicio.setMargin(new Insets(10, 10, 10, 10));
-        // botonInicio.addActionListener(ListeneButtonInicio);
         botonInicio.addMouseListener(EventsButtonInicio);
         // ? Diseño del Boton Finalizar
         botonFinalizar.setBackground(new Color(0x6598a4));
         botonFinalizar.setForeground(Color.BLACK);
         botonFinalizar.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
         botonFinalizar.setMargin(new Insets(10, 10, 10, 10));
-        // botonFinalizar.addActionListener(ListeneButtonInicio);
         botonFinalizar.addMouseListener(EventsButtonFinalizar);
 
         // ! Diseño de los CheckBox
@@ -130,12 +112,10 @@ public class paneldeOpciones extends JPanel {
         automatizado.setBackground(new Color(0x162524));
         automatizado.setFocusPainted(false);
         automatizado.setOpaque(false);
-        // automatizado.addMouseListener(EventsButtonInicio);
 
         // ? Diseño del CheckBox Manual
         manual.setFont(new Font("Consolas", Font.BOLD, 14));
         manual.setForeground(new Color(0x000000));
-        // manual.setBackground(new Color(0x162524));
         manual.setFocusPainted(false);
         manual.setOpaque(false);
 
@@ -161,7 +141,6 @@ public class paneldeOpciones extends JPanel {
         panelmenu.add(botonFinalizar);
         panelmenu.add(automatizado);
         panelmenu.add(manual);
-        // panelmenu.add(comunicacion);
 
         panelmenu.setBorder(borde);
         return panelmenu;
