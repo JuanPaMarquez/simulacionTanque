@@ -58,7 +58,7 @@ public class TanqueConValvulaVisual extends JPanel implements ActionListener {
         // ImageIcon valvulaO = new ImageIcon("public/tanqueAbierta.png");
         valvulaC = new ImageIcon("src/public/valvulaCerrada.png");
         valvulaA = new ImageIcon("src/public/valvulaAbierta.png");
-        casaImg = new ImageIcon("src/public/house.png");
+        casaImg = new ImageIcon("src/public/casa2removebg.png");
 
     }
 
@@ -270,7 +270,7 @@ public class TanqueConValvulaVisual extends JPanel implements ActionListener {
         // Dibujar el nivel de agua
         g2d.setColor(Color.BLUE);
         int alturaAgua = (int) ((nivelAgua / 1000.0) * ALTO_TANQUE); // Nivel proporcional
-        hasFlowed = (alturaAgua>=2)?true:false;
+        hasFlowed = (alturaAgua>4)?true:false;
         posicionAgua = yTanque + ALTO_TANQUE - alturaAgua;
         g2d.fillRect(xTanque, posicionAgua, ANCHO_TANQUE, alturaAgua); // Posición del agua
 
@@ -345,7 +345,10 @@ public class TanqueConValvulaVisual extends JPanel implements ActionListener {
             g2d.drawImage(this.valvulaC.getImage(), xTuberia + 40, yTuberia - 30, 50, 50, this);
         }
 
-        g2d.drawImage(this.casaImg.getImage(), 550, 380, 180, 150, this);
+
+      
+        g2d.drawImage(this.casaImg.getImage(), 500, 350, 220, 150, this);
+
 
     }
 
@@ -376,11 +379,15 @@ public class TanqueConValvulaVisual extends JPanel implements ActionListener {
         g2d.drawLine(xInicio+50, yInicio, xFinal+ 50, yInicio); // Tuberia Línea superior
         g2d.drawLine(xInicio+50, yInicio + 10, xFinal + 50, yInicio+10 ); // Tuberia Línea inferior
 
-        if (!(vacioAguaDesague == aguaDesague && estadoValvulaCasa == EstadoValvulaCasa.CERRADA)) {
+        if (!(vacioAguaDesague == aguaDesague)) {
+            
+         if (!(vacioAguaDesague == aguaDesague && estadoValvulaCasa == EstadoValvulaCasa.CERRADA)) {
             g2d.setColor(Color.BLUE);
            
             g2d.drawLine(xInicio+40 + vacioAguaDesague, yInicio+5,  xInicio + 40 + aguaDesague, yInicio+5);
         }
+    }
+        
 
        
         
@@ -418,9 +425,11 @@ public class TanqueConValvulaVisual extends JPanel implements ActionListener {
 
             if (aguaH < 82) {
 
-                aguaH = aguaH + 3;
-            } else if (caidaAgua < posicionAgua - 2) {
-                aguaV = aguaV + 3;
+                aguaH = aguaH + 2;
+            } else if (caidaAgua < posicionAgua - 3) {
+
+                aguaV = aguaV + 2;
+
             } else if (nivelAgua < 970) {
 
                 // System.out.println("llenado"+estadoValvula);
@@ -430,24 +439,38 @@ public class TanqueConValvulaVisual extends JPanel implements ActionListener {
         } else {
             if (vacioAguaH < (aguaH)) {
 
-                vacioAguaH = vacioAguaH + 3;
+                vacioAguaH = vacioAguaH + 2;
             } else if (vacioAguaV < aguaV) {
 
-                vacioAguaV = vacioAguaV + 3;
+                vacioAguaV = vacioAguaV + 2;
             }
         }
 
      
         if (estadoValvulaCasa == EstadoValvulaCasa.ABIERTA) {
+            if (nivelAgua > 0) {
 
-            if (aguaDesague < 100 && hasFlowed) {
-                aguaDesague = aguaDesague + 3;
+                // System.out.println("llenado"+estadoValvula);
+                nivelAgua=nivelAgua-0.2;
+            }else{
+                nivelAgua=0;
+            }
+           // nivelAgua=nivelAgua-0.2;
+
+            if (aguaDesague < 110 && hasFlowed) {
+                aguaDesague = aguaDesague + 2;
             } 
+            if (!hasFlowed) {
+                if (vacioAguaDesague < (aguaDesague)) {
+
+                    vacioAguaDesague = vacioAguaDesague + 1;
+                } 
+            }
 
         }else {
-            if (vacioAguaDesague < (aguaDesague)) {
+            if (vacioAguaDesague <= (aguaDesague)) {
 
-                vacioAguaDesague = vacioAguaDesague + 3;
+                vacioAguaDesague = vacioAguaDesague + 1;
             } 
         }
         // Controlar el llenado o vaciado según el estado de la válvula
