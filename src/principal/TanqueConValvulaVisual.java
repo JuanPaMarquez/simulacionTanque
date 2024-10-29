@@ -91,7 +91,7 @@ public class TanqueConValvulaVisual extends JPanel implements ActionListener {
         botonValvulaCasa = new JButton(); // Estado inicial: ABIERTA // Reducir márgenes para mejor ajuste
 
         botonValvulaCasa.setFocusable(false); // Evitar que el botón tome el foco
-        botonValvulaCasa.setBorderPainted(true);
+        botonValvulaCasa.setBorderPainted(false);
         botonValvulaCasa.setContentAreaFilled(false);
         botonValvulaCasa.setBounds(382, 385, 50, 40);
         botonValvulaCasa.addActionListener(new ActionListener() {
@@ -276,7 +276,6 @@ public class TanqueConValvulaVisual extends JPanel implements ActionListener {
         }
 
         // Agua Vertical
-
         if (aguaH >= 82) {
             g2d.setColor(Color.BLUE);
             caidaAgua = y2Agua + aguaV;
@@ -404,6 +403,16 @@ public class TanqueConValvulaVisual extends JPanel implements ActionListener {
             }
             repaint();
         } // Redibujar el tanque con el nuevo nivel de agua
+        else {
+            nivelAgua = 0;
+            aguaH = 0;
+            vacioAguaH = 0;
+            aguaV = 0;
+            vacioAguaV = 0;
+            aguaDesague = 0;
+            vacioAguaDesague = 0;
+        }
+
     }
 
     public static void main(String[] args) {
