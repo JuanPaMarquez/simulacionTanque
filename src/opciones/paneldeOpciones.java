@@ -5,10 +5,16 @@ import java.awt.*;
 import javax.swing.border.Border;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import principal.TanqueConValvulaVisual;
 // import java.awt.event.ActionListener;
 // import java.awt.event.ActionEvent;
 
 public class paneldeOpciones extends JPanel {
+
+    public JButton botonInicio = new JButton("Iniciar");
+    JButton botonFinalizar = new JButton("Finalizar");
+    JCheckBox automatizado = new JCheckBox("Automatico", true);
+    JCheckBox manual = new JCheckBox("Manual");
 
     public JPanel menu() {
 
@@ -25,11 +31,7 @@ public class paneldeOpciones extends JPanel {
 
         ButtonGroup comunicacion = new ButtonGroup();
         // ! Creacion de los elementos del menu
-        JButton botonInicio = new JButton("Iniciar");
-        JButton botonFinalizar = new JButton("Finalizar");
-        JCheckBox automatizado = new JCheckBox("Automatico", true);
-        JCheckBox manual = new JCheckBox("Manual");
-        botonInicio.setSelected(true);
+        botonInicio.setSelected(false);
         botonFinalizar.setSelected(true);
 
         JLabel Titulomenu = new JLabel("Panel de Control");
@@ -45,6 +47,9 @@ public class paneldeOpciones extends JPanel {
             public void mouseClicked(MouseEvent e) {
                 botonInicio.setBackground(new Color(0x0cf204));
                 botonFinalizar.setBackground(new Color(0x6598a4));
+                botonInicio.setSelected(true);
+                TanqueConValvulaVisual llamar1 = new TanqueConValvulaVisual();
+                llamar1.paintComponents(getGraphics());
             }
 
             @Override
@@ -71,6 +76,7 @@ public class paneldeOpciones extends JPanel {
             public void mouseClicked(MouseEvent e) {
                 botonFinalizar.setBackground(new Color(0xde0505));
                 botonInicio.setBackground(new Color(0x6598a4));
+                botonInicio.setSelected(false);
             }
 
             @Override
