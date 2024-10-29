@@ -17,6 +17,12 @@ import java.awt.event.MouseEvent;
  */
 public class TanqueConValvulaVisual extends JPanel implements ActionListener {
 
+
+
+    boolean isFlowing = false;
+    boolean hasFlowed = false;
+    private int aguaDesague = 0;
+    private int vacioAguaDesague = 0;
     // Dimensiones del tanque
     private static final int ANCHO_TANQUE = 200;
     private static final int ALTO_TANQUE = 300;
@@ -93,8 +99,9 @@ public class TanqueConValvulaVisual extends JPanel implements ActionListener {
         botonValvulaCasa = new JButton(); // Estado inicial: ABIERTA // Reducir márgenes para mejor ajuste
 
         botonValvulaCasa.setFocusable(false); // Evitar que el botón tome el foco
-        botonValvulaCasa.setBorderPainted(false);
+        botonValvulaCasa.setBorderPainted(true);
         botonValvulaCasa.setContentAreaFilled(false);
+        botonValvulaCasa.setBounds(382, 385, 50, 40);
         botonValvulaCasa.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -109,6 +116,9 @@ public class TanqueConValvulaVisual extends JPanel implements ActionListener {
                     // botonValvula.setText("Abrir Válvula");
                     // break;
                     case CERRADA:
+                    aguaDesague = 0;
+                    vacioAguaDesague = 0;
+
                         estadoValvulaCasa = EstadoValvulaCasa.ABIERTA;
 
                         break;
@@ -173,7 +183,7 @@ public class TanqueConValvulaVisual extends JPanel implements ActionListener {
         this.setLayout(null);
         // Añadir el botón al panel y establecer su posición fija
 
-        botonValvulaCasa.setBounds(400, 400, 140, 30); // Posición fija en la esquina superior izquierda
+        //botonValvulaCasa.setBounds(400, 400, 140, 30); // Posición fija en la esquina superior izquierda
         botonValvulaTanque.setBounds(xTuberia + 40, yTuberia - 30, 50, 50);
         botonValvulaTanque.setBorderPainted(false);
         botonValvulaTanque.setContentAreaFilled(false);
@@ -260,6 +270,7 @@ public class TanqueConValvulaVisual extends JPanel implements ActionListener {
         // Dibujar el nivel de agua
         g2d.setColor(Color.BLUE);
         int alturaAgua = (int) ((nivelAgua / 1000.0) * ALTO_TANQUE); // Nivel proporcional
+        hasFlowed = (alturaAgua>=2)?true:false;
         posicionAgua = yTanque + ALTO_TANQUE - alturaAgua;
         g2d.fillRect(xTanque, posicionAgua, ANCHO_TANQUE, alturaAgua); // Posición del agua
 
@@ -350,24 +361,47 @@ public class TanqueConValvulaVisual extends JPanel implements ActionListener {
         int xFinal = xInicio + 100; // 100 píxeles a la derecha
         int yFinal = yInicio + 50; // 50 píxeles hacia abajo
 
+        
+
+    
+     //   g2d.setStroke(new BasicStroke(6));
+     //   g2d.drawLine(xInicio+100, yInicio + 5, xFinal + 50, yInicio+5 ); // Tuberia agua desague
+
         g2d.setColor(Color.BLACK);
         // Tuberia parte horizontal
+        
+     //   g2d.setStroke(new BasicStroke(7));
+      //  g2d.drawLine(xInicio+1, yInicio+5, xInicio+ 50, yInicio+5); 
         g2d.setStroke(new BasicStroke(5));
+        g2d.drawLine(xInicio+50, yInicio, xFinal+ 50, yInicio); // Tuberia Línea superior
+        g2d.drawLine(xInicio+50, yInicio + 10, xFinal + 50, yInicio+10 ); // Tuberia Línea inferior
 
-        g2d.drawLine(xInicio, yInicio, xInicio+ 50, yInicio); // Tuberia Línea superior
-        g2d.drawLine(xInicio, yInicio + 10, xInicio + 50, yInicio+10 ); // Tuberia Línea inferior
+        if (!(vacioAguaDesague == aguaDesague && estadoValvulaCasa == EstadoValvulaCasa.CERRADA)) {
+            g2d.setColor(Color.BLUE);
+           
+            g2d.drawLine(xInicio+40 + vacioAguaDesague, yInicio+5,  xInicio + 40 + aguaDesague, yInicio+5);
+        }
+
+       
+        
+       // g2d.drawLine(xInicio+100, yInicio, xFinal + 50, yInicio); // Tuberia Línea superior
+       // g2d.drawLine(xInicio+100, yInicio + 10, xFinal + 50, yInicio+10 ); // Tuberia Línea inferior
+
 
         
-        g2d.drawLine(xInicio+100, yInicio, xFinal + 50, yInicio); // Tuberia Línea superior
-        g2d.drawLine(xInicio+100, yInicio + 10, xFinal + 50, yInicio+10 ); // Tuberia Línea inferior
+     //   g2d.setStroke(new BasicStroke(6));
+     //   g2d.drawLine(xInicio+100, yInicio + 5, xFinal + 50, yInicio+5 ); // Tuberia agua desague
 
+ //
+
+        
         // Tuberia parte horizontal
        // g2d.drawLine(xTuberia + 80, yTuberia, xTuberia + 163, yTuberia); // Tuberia Línea superior
       //  g2d.drawLine(xTuberia + 80, yTuberia + 10, xTuberia + 158, yTuberia + 10); // Tuberia Línea inferior
       if (estadoValvulaCasa == EstadoValvulaCasa.ABIERTA) {
-        g2d.drawImage(this.valvulaA.getImage(), xInicio + 50, yInicio - 30, 50, 50, this);
+        g2d.drawImage(this.valvulaA.getImage(), xInicio , yInicio - 30, 50, 50, this);
     } else {
-        g2d.drawImage(this.valvulaC.getImage(),  xInicio + 50, yInicio - 30, 50, 50, this);
+        g2d.drawImage(this.valvulaC.getImage(),  xInicio , yInicio - 30, 50, 50, this);
     }
        
 
@@ -401,6 +435,20 @@ public class TanqueConValvulaVisual extends JPanel implements ActionListener {
 
                 vacioAguaV = vacioAguaV + 3;
             }
+        }
+
+     
+        if (estadoValvulaCasa == EstadoValvulaCasa.ABIERTA) {
+
+            if (aguaDesague < 100 && hasFlowed) {
+                aguaDesague = aguaDesague + 3;
+            } 
+
+        }else {
+            if (vacioAguaDesague < (aguaDesague)) {
+
+                vacioAguaDesague = vacioAguaDesague + 3;
+            } 
         }
         // Controlar el llenado o vaciado según el estado de la válvula
 
