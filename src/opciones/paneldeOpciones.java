@@ -10,8 +10,8 @@ public class paneldeOpciones extends JPanel {
 
     public JButton botonInicio = new JButton("Iniciar");
     JButton botonFinalizar = new JButton("Finalizar");
-    JCheckBox automatizado = new JCheckBox("Automatico", true);
-    JCheckBox manual = new JCheckBox("Manual");
+    JCheckBox automatizado = new JCheckBox("Automatico");
+    JCheckBox manual = new JCheckBox("Manual", true);
 
     public JPanel menu() {
 
@@ -121,9 +121,9 @@ public class paneldeOpciones extends JPanel {
 
         // ! ubicación de los checkBox del menu
         int alturaestados = 100;
-        automatizado.setBounds(40, alturaestados, 120, 20);
+        automatizado.setBounds(160, alturaestados, 120, 20);
         automatizado.setFocusable(false);
-        manual.setBounds(180, alturaestados, 100, 20);
+        manual.setBounds(40, alturaestados, 80, 20);
         manual.setFocusable(false);
 
         // ! Ubicación de los botones de inicio y finalizacion

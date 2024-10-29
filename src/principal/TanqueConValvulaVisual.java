@@ -78,7 +78,7 @@ public class TanqueConValvulaVisual extends JPanel implements ActionListener {
     private JButton botonValvulaTanque;
 
     public TanqueConValvulaVisual() {
-        estadoValvulaTanque = estadoValvulaTanque.CERRADA;
+        estadoValvulaTanque = EstadoValvulaTanque.CERRADA;
         ImagenPanel();
         // Configura el temporizador que controla el llenado/vaciado del tanque
         this.add(llamar.menu());
@@ -291,7 +291,7 @@ public class TanqueConValvulaVisual extends JPanel implements ActionListener {
             g2d.drawImage(this.valvulaC.getImage(), xTuberia + 40, yTuberia - 30, 50, 50, this);
         }
 
-        g2d.drawImage(this.casaImg.getImage(), 500, 350, 220, 150, this);
+        g2d.drawImage(this.casaImg.getImage(), 480, 300, 220, 150, this);
     }
 
     /**
@@ -304,7 +304,7 @@ public class TanqueConValvulaVisual extends JPanel implements ActionListener {
 
         // Coordenadas finales (entrada de la casa)
         int xFinal = xInicio + 100; // 100 píxeles a la derecha
-        int yFinal = yInicio + 50; // 50 píxeles hacia abajo
+        // int yFinal = yInicio + 50; // 50 píxeles hacia abajo
 
         // agua desague
 
@@ -426,7 +426,6 @@ public class TanqueConValvulaVisual extends JPanel implements ActionListener {
 
                 JFrame frame = new JFrame("Simulación de Tanque con Válvula y Casita");
                 TanqueConValvulaVisual panel = new TanqueConValvulaVisual();
-                // panel.setBackground(new Color(0xeecfc7));
                 panel.setBackground(Color.white);
                 frame.add(panel);
                 frame.setSize(800, 600); // Aumentar el tamaño para acomodar la tubería y la casa
