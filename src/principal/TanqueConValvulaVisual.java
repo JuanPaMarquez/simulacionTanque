@@ -335,11 +335,13 @@ public class TanqueConValvulaVisual extends JPanel implements ActionListener {
 
     }
 
+
+
     @Override
     public void actionPerformed(ActionEvent e) {
 
         if (llamar.botonInicio.isSelected() == true) {
-            botonValvulaCasa.setEnabled(true);
+            botonValvulaCasa.setEnabled(true); 
             botonValvulaTanque.setEnabled(true);
             if (estadoValvulaTanque == EstadoValvulaTanque.ABIERTA) {
 
@@ -409,6 +411,7 @@ public class TanqueConValvulaVisual extends JPanel implements ActionListener {
             repaint();
         } // Redibujar el tanque con el nuevo nivel de agua
         else {
+          
             botonValvulaCasa.setEnabled(false);
             botonValvulaTanque.setEnabled(false);
             nivelAgua = 0;
