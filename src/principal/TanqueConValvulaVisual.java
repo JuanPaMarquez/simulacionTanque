@@ -404,6 +404,8 @@ public class TanqueConValvulaVisual extends JPanel implements ActionListener {
             repaint();
         } // Redibujar el tanque con el nuevo nivel de agua
         else {
+            botonValvulaCasa.setEnabled(false);
+            botonValvulaTanque.setEnabled(false);
             nivelAgua = 0;
             aguaH = 0;
             vacioAguaH = 0;
