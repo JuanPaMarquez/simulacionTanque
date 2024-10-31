@@ -7,14 +7,9 @@ import java.awt.event.MouseEvent;
 
 public class RoundedButton extends JButton {
 
-    // private enum tipoBoton {
-
-    // MAXIMIZAR, CERRAR , MINIMIZAR
-    // }
-    private static final int RADIUS = 15; // Radio de las esquinas
-    // Constructor para crear un botón elegante con icono, que ejecuta la acción
-    // pasada
-
+    
+    private static final int RADIUS = 10; // Radio de las esquinas
+    // Constructor para crear un botón elegante con icono, que ejecuta la acción pasada
     public RoundedButton(String iconoTexto, JFrame frame, boolean esMinimizar) {
         // Usar el iconoTexto como el texto del botón
         super(iconoTexto);
@@ -55,7 +50,7 @@ public class RoundedButton extends JButton {
         });
 
     }
-
+    
     @Override
     protected void paintComponent(Graphics g) {
         if (getModel().isArmed()) {
@@ -64,6 +59,7 @@ public class RoundedButton extends JButton {
             g.setColor(getBackground()); // Color de fondo normal
         }
         g.fillRoundRect(0, 0, getWidth(), getHeight(), RADIUS, RADIUS);
+        g.drawRoundRect(0, 0, getWidth(), getHeight(), RADIUS, RADIUS);
         super.paintComponent(g);
     }
 
@@ -71,5 +67,8 @@ public class RoundedButton extends JButton {
     public Dimension getPreferredSize() {
         return new Dimension(50, 30); // Tamaño del botón
     }
+
+
+
 
 }

@@ -2,13 +2,12 @@ package principal;
 
 import javax.swing.*;
 
-import opciones.RoundedButton;
+
 import opciones.paneldeOpciones;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
 import java.awt.event.MouseListener;
 import java.text.DecimalFormat;
 import java.awt.event.MouseEvent;
@@ -26,9 +25,9 @@ public class TanqueConValvulaVisual extends JPanel implements ActionListener {
     private int aguaDesague = 0;
     private int vacioAguaDesague = 0;
     // Dimensiones del tanque
-    private static final int ANCHO_TANQUE = 200;
-    private static final int ALTO_TANQUE = 300;
-    private static final int INTERVALO = 10; // Intervalo de tiempo en milisegundos
+    private  final int ANCHO_TANQUE = 200;
+    private  final int ALTO_TANQUE = 300;
+    private  final int INTERVALO = 1; // Intervalo de tiempo en milisegundos
 
     // Nivel de agua en porcentaje
     private double nivelAgua = 0;
@@ -83,7 +82,11 @@ public class TanqueConValvulaVisual extends JPanel implements ActionListener {
         // Configura el temporizador que controla el llenado/vaciado del tanque
         this.add(llamar.menu());
 
+      
+    
+
         timer = new Timer(INTERVALO, this);
+       
         timer.start(); // Inicia la animación
 
         // Configura el botón de la válvula
@@ -208,8 +211,9 @@ public class TanqueConValvulaVisual extends JPanel implements ActionListener {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2d = (Graphics2D) g;
-        paintComponentcuadricula(g2d);
 
+        
+        paintComponentcuadricula(g2d);
         // Antialiasing para mejor calidad visual
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
@@ -304,7 +308,6 @@ public class TanqueConValvulaVisual extends JPanel implements ActionListener {
 
         // Coordenadas finales (entrada de la casa)
         int xFinal = xInicio + 100; // 100 píxeles a la derecha
-        // int yFinal = yInicio + 50; // 50 píxeles hacia abajo
 
         // agua desague
 
@@ -315,8 +318,8 @@ public class TanqueConValvulaVisual extends JPanel implements ActionListener {
         g2d.drawLine(xInicio + 50, yInicio, xFinal + 50, yInicio); // Tuberia Línea superior
         g2d.drawLine(xInicio + 50, yInicio + 10, xFinal + 50, yInicio + 10); // Tuberia Línea inferior
 
-        if (!(vacioAguaDesague == aguaDesague)) {
-
+        if ((vacioAguaDesague == aguaDesague)) {
+        }else{
             if (!(vacioAguaDesague == aguaDesague && estadoValvulaCasa == EstadoValvulaCasa.CERRADA)) {
                 g2d.setColor(Color.BLUE);
 
@@ -336,6 +339,8 @@ public class TanqueConValvulaVisual extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
 
         if (llamar.botonInicio.isSelected() == true) {
+            botonValvulaCasa.setEnabled(true);
+            botonValvulaTanque.setEnabled(true);
             if (estadoValvulaTanque == EstadoValvulaTanque.ABIERTA) {
 
                 if (aguaH < 82) {
@@ -372,7 +377,7 @@ public class TanqueConValvulaVisual extends JPanel implements ActionListener {
                 // nivelAgua=nivelAgua-0.2;
 
                 if (aguaDesague < 110 && hasFlowed) {
-                    aguaDesague = aguaDesague + 2;
+                    aguaDesague = aguaDesague + 1;
                 }
                 if (!hasFlowed) {
                     if (vacioAguaDesague < (aguaDesague)) {
@@ -382,7 +387,7 @@ public class TanqueConValvulaVisual extends JPanel implements ActionListener {
                 }
 
             } else {
-                if (vacioAguaDesague <= (aguaDesague)) {
+                if (vacioAguaDesague < (aguaDesague)) {
 
                     vacioAguaDesague = vacioAguaDesague + 1;
                 }
@@ -417,70 +422,5 @@ public class TanqueConValvulaVisual extends JPanel implements ActionListener {
 
     }
 
-    public static void main(String[] args) {
-
-        SwingUtilities.invokeLater(new Runnable() {
-            // Variables de posición para el arrastre de la ventana
-            int posX = 0;
-            int posY = 0;
-
-            public void run() {
-
-                JFrame frame = new JFrame("Simulación de Tanque con Válvula y Casita");
-                TanqueConValvulaVisual panel = new TanqueConValvulaVisual();
-                panel.setBackground(Color.white);
-                frame.add(panel);
-                frame.setSize(800, 600); // Aumentar el tamaño para acomodar la tubería y la casa
-                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                frame.setLocationRelativeTo(null); // Centrar la ventana
-                frame.setUndecorated(true);
-
-                // Crear un panel para actuar como barra de título personalizada
-                JPanel barraTitulo = new JPanel();
-                barraTitulo.setBackground(new Color(44, 62, 80));
-                barraTitulo.setPreferredSize(new Dimension(400, 40));
-                barraTitulo.setLayout(new BorderLayout());
-
-                // Crear botones para minimizar, maximizar y cerrar
-                RoundedButton btnMinimizar = new RoundedButton("_", frame, true);
-
-                RoundedButton btnCerrar = new RoundedButton("X", frame, false);
-                JLabel title = new JLabel(" Simulación de Tanque con Válvula y Casita");
-                title.setForeground(Color.WHITE);
-                title.setFont(new Font("times new roman", Font.BOLD, 20));
-                // Acción del botón Cerrar
-
-                // Añadir botones a la barra de título personalizada
-                barraTitulo.add(title, BorderLayout.WEST);
-                // Crear un panel para los botones
-                JPanel panelBotones = new JPanel();
-                panelBotones.setBounds(0, 0, 120, 30);
-                panelBotones.setBackground(new Color(44, 62, 80));
-                panelBotones.setLayout(new FlowLayout(FlowLayout.RIGHT));
-                panelBotones.add(btnMinimizar);
-                panelBotones.add(btnCerrar);
-
-                barraTitulo.add(panelBotones, BorderLayout.EAST);
-                // Añadir el panel de barra de título al JFrame
-                frame.add(barraTitulo, BorderLayout.NORTH);
-
-                // Hacer la barra de título arrastrable para mover la ventana
-                barraTitulo.addMouseListener(new MouseAdapter() {
-                    @Override
-                    public void mousePressed(MouseEvent e) {
-                        posX = e.getX();
-                        posY = e.getY();
-                    }
-                });
-
-                barraTitulo.addMouseMotionListener(new MouseAdapter() {
-                    @Override
-                    public void mouseDragged(MouseEvent e) {
-                        frame.setLocation(e.getXOnScreen() - posX, e.getYOnScreen() - posY);
-                    }
-                });
-                frame.setVisible(true);
-            }
-        });
-    }
+ 
 }
