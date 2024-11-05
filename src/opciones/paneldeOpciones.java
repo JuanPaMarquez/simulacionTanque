@@ -3,6 +3,9 @@ package opciones;
 import javax.swing.*;
 import java.awt.*;
 import javax.swing.border.Border;
+
+import principal.TanqueConValvulaVisual;
+
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -46,6 +49,7 @@ public class paneldeOpciones extends JPanel {
                 botonInicio.setBackground(new Color(0x0cf204));
                 botonFinalizar.setBackground(new Color(0x6598a4));
                 botonInicio.setSelected(true);
+                TanqueConValvulaVisual.isIniciado=true;
             }
 
             @Override

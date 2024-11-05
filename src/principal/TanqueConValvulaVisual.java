@@ -21,7 +21,9 @@ public class TanqueConValvulaVisual extends JPanel implements ActionListener {
 
     paneldeOpciones llamar = new paneldeOpciones();
 
-
+    public static boolean isIniciado=true;
+    boolean subiendo = true;
+    boolean subiendo2 = true;
     int nivelAControlar = 100;
     boolean cableArribaON = true;//cable conectado a valvula llenadp
     boolean cableAbajoON = false;//cable conectado a valvula vaciado
@@ -86,6 +88,7 @@ public class TanqueConValvulaVisual extends JPanel implements ActionListener {
     private JButton botonValvulaTanque;
 
     public TanqueConValvulaVisual() {
+       
         estadoValvulaTanque = EstadoValvulaTanque.CERRADA;
         ImagenPanel();
         // Configura el temporizador que controla el llenado/vaciado del tanque
@@ -317,7 +320,7 @@ public class TanqueConValvulaVisual extends JPanel implements ActionListener {
 
 
         int alturaAgua = (int) ((nivelAgua / 1000.0) * ALTO_TANQUE); // Nivel proporcional
-        levelAgua=  (int)  (alturaAgua/10);
+        levelAgua=  (int)  ((nivelAgua / 10));
 
       //  System.out.println(alturaAgua);
         hasFlowed = (alturaAgua > 4) ? true : false;
@@ -341,6 +344,7 @@ public class TanqueConValvulaVisual extends JPanel implements ActionListener {
         int y1Agua = yTuberia + 5;
         int x2Agua = xTuberia + 80;
         int y2Agua = yTuberia + 5;
+        g2d.setStroke(new BasicStroke(5));
 
         g2d.setColor(Color.BLUE);
         g2d.drawLine(x1Agua, y1Agua, 70, y2Agua);
@@ -387,6 +391,8 @@ public class TanqueConValvulaVisual extends JPanel implements ActionListener {
         g2d.drawOval(xControler+10,yControler+100, 50, 50);
         g2d.drawLine(xControler+60,yControler+125,xControler+125,yControler+125); // Linea Derecha
         g2d.drawString("ST", xControler+27, yControler+130);
+
+        g2d.setStroke(new BasicStroke(5));
 
         // Agua Vertical
         if (aguaH >= 82) {
@@ -449,25 +455,40 @@ public class TanqueConValvulaVisual extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
 
-       
- if (llamar.automatizado.isSelected()) {
-    isAutomatic=true;
-    estadoValvulaTanque = EstadoValvulaTanque.ABIERTA;
-    estadoValvulaCasa = EstadoValvulaCasa.CERRADA;     
-    //System.out.println("Automatizado");
-    }
+        if (llamar.automatizado.isSelected() && isIniciado) {
+            isAutomatic=true;
+            estadoValvulaTanque = EstadoValvulaTanque.ABIERTA;
+            estadoValvulaCasa = EstadoValvulaCasa.CERRADA;     
+            //System.out.println("Automatizado");
+            isIniciado=false;
+            }
+
 
     if (isAutomatic) {
-        //System.out.println("Automatizado2");
-        if (nivelAgua >= nivelAControlar+5 && estadoValvulaTanque == EstadoValvulaTanque.ABIERTA) {
+        System.out.println("Automatizado2"+levelAgua);
+       
+                if (levelAgua >= nivelAControlar+5 && estadoValvulaTanque == EstadoValvulaTanque.ABIERTA && estadoValvulaCasa == EstadoValvulaCasa.CERRADA && subiendo) {
+             subiendo = false;
             estadoValvulaTanque = EstadoValvulaTanque.CERRADA;
                  estadoValvulaCasa = EstadoValvulaCasa.ABIERTA;
+                 subiendo2=true;
+                
+                aguaDesague = 0;
+                vacioAguaDesague = 0;
+                  
            }
 
-         if (nivelAgua <= nivelAControlar-5 && estadoValvulaTanque == EstadoValvulaTanque.CERRADA) {
+          if (levelAgua <= nivelAControlar-5 && estadoValvulaTanque == EstadoValvulaTanque.CERRADA && estadoValvulaCasa == EstadoValvulaCasa.ABIERTA && subiendo2) {
+              subiendo2 = false;
              estadoValvulaTanque = EstadoValvulaTanque.ABIERTA;
-             estadoValvulaCasa = EstadoValvulaCasa.CERRADA;    
-            }
+              estadoValvulaCasa = EstadoValvulaCasa.CERRADA;    
+              subiendo=true;
+              aguaH = 0;
+                   vacioAguaH = 0;
+                   aguaV = 0;
+                  vacioAguaV = 0;
+                
+             }
     
      
  }       
