@@ -185,9 +185,9 @@ public class TanqueConValvulaVisual extends JPanel implements ActionListener {
         botonValvulaTanque.setBorder(BorderFactory.createLineBorder(Color.BLACK, 3));
         botonValvulaTanque.setMargin(new Insets(10, 10, 10, 10));
         
-        botonValvulaTanque.addMouseListener(new MouseListener() {
+        botonValvulaTanque.addActionListener(new ActionListener() {
             @Override
-            public void mouseClicked(MouseEvent e) {
+            public void actionPerformed(ActionEvent e) {
                 switch (estadoValvulaTanque) {
                     case ABIERTA:
                         estadoValvulaTanque = EstadoValvulaTanque.CERRADA;
@@ -206,24 +206,8 @@ public class TanqueConValvulaVisual extends JPanel implements ActionListener {
 
             }
 
-            @Override
-            public void mousePressed(MouseEvent e) {
-            }
 
-            @Override
-            public void mouseReleased(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseEntered(MouseEvent e) {
-                botonValvulaTanque.setBackground(new Color(0x2ff238));
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-                botonValvulaTanque.setBackground(Color.WHITE);
-            }
+          
 
         });
 
@@ -465,6 +449,8 @@ public class TanqueConValvulaVisual extends JPanel implements ActionListener {
 
 
     if (isAutomatic) {
+        this.botonValvulaCasa.setEnabled(false);
+        this.botonValvulaTanque.setEnabled(false);
         System.out.println("Automatizado2"+levelAgua);
        
                 if (levelAgua >= nivelAControlar+5 && estadoValvulaTanque == EstadoValvulaTanque.ABIERTA && estadoValvulaCasa == EstadoValvulaCasa.CERRADA && subiendo) {
@@ -491,15 +477,17 @@ public class TanqueConValvulaVisual extends JPanel implements ActionListener {
              }
     
      
- }       
+ } else {
+    this.botonValvulaCasa.setEnabled(true); 
+    this.botonValvulaTanque.setEnabled(true);
+    }
 
 
   
 
 
-        if (llamar.botonInicio.isSelected() == true) {
-            botonValvulaCasa.setEnabled(true); 
-            botonValvulaTanque.setEnabled(true);
+        if (llamar.botonInicio.isSelected() == true ) {
+           
             if (estadoValvulaTanque == EstadoValvulaTanque.ABIERTA) {
 
                 if (aguaH < 82) {
