@@ -22,7 +22,8 @@ public class TanqueConValvulaVisual extends JPanel implements ActionListener {
 
 
     int nivelAControlar = 100;
-    boolean cableON = false;//cable conectado
+    boolean cableArribaON = true;//cable conectado a valvula llenadp
+    boolean cableAbajoON = false;//cable conectado a valvula vaciado
 
 
     boolean isFlowing = false;
@@ -295,7 +296,7 @@ public class TanqueConValvulaVisual extends JPanel implements ActionListener {
         float[] dashPattern = {10, 10};
         g2d.setStroke(new BasicStroke(2, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER, 10, dashPattern, 0));
         
-        if (cableON == true) {
+        if (cableArribaON == true) {
             g2d.setColor(Color.GREEN);
         }
         else {
@@ -303,6 +304,12 @@ public class TanqueConValvulaVisual extends JPanel implements ActionListener {
         }
 
         g2d.drawLine(xControler+35,yControler+20,xControler+35,yControler+100); // Linea Derecha
+        if (cableAbajoON == true) {
+            g2d.setColor(Color.GREEN);
+        }
+        else {
+            g2d.setColor(Color.BLACK);
+        }
         g2d.drawLine(xControler+35,yControler+150,xControler+35,yControler+400); // Linea Derecha
         g2d.drawLine(xControler+35,yControler+400,xControler+358,yControler+400); // Linea Derecha
         g2d.drawLine(xControler+358,yControler+400,xControler+358,yControler+310); // Linea Derecha
