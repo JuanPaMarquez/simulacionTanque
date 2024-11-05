@@ -10,7 +10,7 @@ public class paneldeOpciones extends JPanel {
 
     public JButton botonInicio = new JButton("Iniciar");
     JButton botonFinalizar = new JButton("Finalizar");
-    JCheckBox automatizado = new JCheckBox("Automatico");
+    public JCheckBox automatizado = new JCheckBox("Automatico");
     JCheckBox manual = new JCheckBox("Manual", true);
 
     public JPanel menu() {
@@ -42,6 +42,7 @@ public class paneldeOpciones extends JPanel {
         MouseListener EventsButtonInicio = new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
+
                 botonInicio.setBackground(new Color(0x0cf204));
                 botonFinalizar.setBackground(new Color(0x6598a4));
                 botonInicio.setSelected(true);

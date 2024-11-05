@@ -25,7 +25,8 @@ public class TanqueConValvulaVisual extends JPanel implements ActionListener {
     int nivelAControlar = 100;
     boolean cableArribaON = true;//cable conectado a valvula llenadp
     boolean cableAbajoON = false;//cable conectado a valvula vaciado
-
+    private int levelAgua =0;
+    private boolean isAutomatic=false; 
 
     boolean isFlowing = false;
     boolean hasFlowed = false;
@@ -133,10 +134,11 @@ public class TanqueConValvulaVisual extends JPanel implements ActionListener {
         botonControlador.setBorderPainted(true);
         botonControlador.setBounds(60, 200, 50, 50);
         botonControlador.setContentAreaFilled(false);
+        botonControlador.setBorderPainted(false);
         botonControlador.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                int numero = 0; 
+                int numero = 100; 
                 boolean valido = false; 
                 while (!valido)
                 { 
@@ -312,9 +314,16 @@ public class TanqueConValvulaVisual extends JPanel implements ActionListener {
 
         // Dibujar el nivel de agua
         g2d.setColor(Color.BLUE);
+
+
         int alturaAgua = (int) ((nivelAgua / 1000.0) * ALTO_TANQUE); // Nivel proporcional
+        levelAgua=  (int)  (alturaAgua/10);
+
+      //  System.out.println(alturaAgua);
         hasFlowed = (alturaAgua > 4) ? true : false;
+
         posicionAgua = yTanque + ALTO_TANQUE - alturaAgua;
+
         g2d.fillRect(xTanque, posicionAgua, ANCHO_TANQUE, alturaAgua); // Posición del agua
 
         // Dibujar el porcentaje del nivel de agua
@@ -439,6 +448,33 @@ public class TanqueConValvulaVisual extends JPanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+
+       
+ if (llamar.automatizado.isSelected()) {
+    isAutomatic=true;
+    estadoValvulaTanque = EstadoValvulaTanque.ABIERTA;
+    estadoValvulaCasa = EstadoValvulaCasa.CERRADA;     
+    //System.out.println("Automatizado");
+    }
+
+    if (isAutomatic) {
+        //System.out.println("Automatizado2");
+        if (nivelAgua >= nivelAControlar+5 && estadoValvulaTanque == EstadoValvulaTanque.ABIERTA) {
+            estadoValvulaTanque = EstadoValvulaTanque.CERRADA;
+                 estadoValvulaCasa = EstadoValvulaCasa.ABIERTA;
+           }
+
+         if (nivelAgua <= nivelAControlar-5 && estadoValvulaTanque == EstadoValvulaTanque.CERRADA) {
+             estadoValvulaTanque = EstadoValvulaTanque.ABIERTA;
+             estadoValvulaCasa = EstadoValvulaCasa.CERRADA;    
+            }
+    
+     
+ }       
+
+
+  
+
 
         if (llamar.botonInicio.isSelected() == true) {
             botonValvulaCasa.setEnabled(true); 
