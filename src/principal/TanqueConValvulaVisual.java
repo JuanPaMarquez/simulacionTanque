@@ -451,16 +451,31 @@ public class TanqueConValvulaVisual extends JPanel implements ActionListener {
         if (llamar.automatizado.isSelected()) {
             isAutomatic=true;
             if (isIniciado) {
-                estadoValvulaTanque = EstadoValvulaTanque.ABIERTA;
-                estadoValvulaCasa = EstadoValvulaCasa.CERRADA;     
+                if (subiendo) {
+                    estadoValvulaTanque = EstadoValvulaTanque.ABIERTA;
+                    estadoValvulaCasa = EstadoValvulaCasa.CERRADA;
+                   
+                    vacioAguaH = 0;
+                   
+                    vacioAguaV = 0;
+                   
+                }
+                if (subiendo2) {
+                    estadoValvulaTanque = EstadoValvulaTanque.CERRADA;
+                    estadoValvulaCasa = EstadoValvulaCasa.ABIERTA;
+                    
+                    
+                }
+                   
             //System.out.println("Automatizado");
             isIniciado=false;  
             this.cableAbajoON=false;
             this.cableArribaON=true;
-            aguaH = 0;
-            vacioAguaH = 0;
-            aguaV = 0;
-           vacioAguaV = 0;
+
+           
+                
+            
+         
             
             }
             
@@ -479,7 +494,7 @@ public class TanqueConValvulaVisual extends JPanel implements ActionListener {
         this.botonValvulaTanque.setEnabled(false);
         //System.out.println("Automatizado2"+levelAgua);
        
-                if (levelAgua >= nivelAControlar+delay && estadoValvulaTanque == EstadoValvulaTanque.ABIERTA && estadoValvulaCasa == EstadoValvulaCasa.CERRADA && subiendo) {
+                if (levelAgua >= nivelAControlar+delay  && subiendo) {
                     this.cableArribaON=false;
                     this.cableAbajoON=true;
                     subiendo = false;
@@ -492,7 +507,7 @@ public class TanqueConValvulaVisual extends JPanel implements ActionListener {
                   
            }
 
-          if (levelAgua <= nivelAControlar-delay && estadoValvulaTanque == EstadoValvulaTanque.CERRADA && estadoValvulaCasa == EstadoValvulaCasa.ABIERTA && subiendo2) {
+          if (levelAgua <= nivelAControlar-delay  && subiendo2) {
             this.cableArribaON=true;
             this.cableAbajoON=false;
             subiendo2 = false;
