@@ -150,7 +150,7 @@ public class TanqueConValvulaVisual extends JPanel implements ActionListener {
                         String input = JOptionPane.showInputDialog(null, "¿A que nivel tendras el tanque?:"); 
                         try { 
                             numero = Integer.parseInt(input); 
-                            if (numero >= 50 && numero <= 100) { valido = true; } 
+                            if (numero >= 30 && numero <= 100) { valido = true; } 
                             else { 
                                 JOptionPane.showMessageDialog(null, "Por favor, introduce un nivel válido entre 50 y 100."); 
                             } 
@@ -454,10 +454,10 @@ public class TanqueConValvulaVisual extends JPanel implements ActionListener {
                 if (subiendo) {
                     estadoValvulaTanque = EstadoValvulaTanque.ABIERTA;
                     estadoValvulaCasa = EstadoValvulaCasa.CERRADA;
-                   
                     vacioAguaH = 0;
-                   
                     vacioAguaV = 0;
+                   
+                    
                    
                 }
                 if (subiendo2) {
