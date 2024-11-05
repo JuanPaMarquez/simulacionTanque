@@ -20,6 +20,11 @@ public class TanqueConValvulaVisual extends JPanel implements ActionListener {
 
     paneldeOpciones llamar = new paneldeOpciones();
 
+
+    int nivelAControlar = 100;
+    boolean cableON = false;//cable conectado
+
+
     boolean isFlowing = false;
     boolean hasFlowed = false;
     private int aguaDesague = 0;
@@ -212,6 +217,9 @@ public class TanqueConValvulaVisual extends JPanel implements ActionListener {
         super.paintComponent(g);
         Graphics2D g2d = (Graphics2D) g;
 
+
+
+     
         
         paintComponentcuadricula(g2d);
         // Antialiasing para mejor calidad visual
@@ -278,6 +286,32 @@ public class TanqueConValvulaVisual extends JPanel implements ActionListener {
             g2d.setColor(Color.BLUE);
             g2d.drawLine(x2Agua + vacioAguaH, y1Agua, x2Agua + aguaH, y2Agua);
         }
+
+
+
+        int xControler=50;
+        int yControler=100;
+        //controlador de nivel
+        float[] dashPattern = {10, 10};
+        g2d.setStroke(new BasicStroke(2, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER, 10, dashPattern, 0));
+        
+        if (cableON == true) {
+            g2d.setColor(Color.GREEN);
+        }
+        else {
+            g2d.setColor(Color.BLACK);
+        }
+
+        g2d.drawLine(xControler+35,yControler+20,xControler+35,yControler+100); // Linea Derecha
+        g2d.drawLine(xControler+35,yControler+150,xControler+35,yControler+400); // Linea Derecha
+        g2d.drawLine(xControler+35,yControler+400,xControler+358,yControler+400); // Linea Derecha
+        g2d.drawLine(xControler+358,yControler+400,xControler+358,yControler+310); // Linea Derecha
+      
+       g2d.setColor(Color.BLACK);
+        g2d.setStroke(new BasicStroke(3));
+        g2d.drawOval(xControler+10,yControler+100, 50, 50);
+        g2d.drawLine(xControler+60,yControler+125,xControler+125,yControler+125); // Linea Derecha
+        g2d.drawString("ST", xControler+27, yControler+130);
 
         // Agua Vertical
         if (aguaH >= 82) {
