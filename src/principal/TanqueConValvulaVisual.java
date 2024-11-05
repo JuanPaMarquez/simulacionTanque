@@ -362,7 +362,7 @@ public class TanqueConValvulaVisual extends JPanel implements ActionListener {
         g2d.setStroke(new BasicStroke(2, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER, 10, dashPattern, 0));
 
         if (cableArribaON == true && isAutomatic) {
-            g2d.setColor(Color.getHSBColor(0.33f, 0.4f, 0.6f));
+            g2d.setColor(Color.getHSBColor(0.25f, 0.8f, 0.8f));
         }
         else {
             g2d.setColor(Color.BLACK);
@@ -370,7 +370,7 @@ public class TanqueConValvulaVisual extends JPanel implements ActionListener {
 
         g2d.drawLine(xControler+35,yControler+20,xControler+35,yControler+100); // Linea Derecha
         if (cableAbajoON  && isAutomatic) {
-            g2d.setColor(Color.getHSBColor(0.33f, 0.4f, 0.6f));
+            g2d.setColor(Color.getHSBColor(0.25f, 0.8f, 0.8f));
         }
         else {
             g2d.setColor(Color.BLACK);
