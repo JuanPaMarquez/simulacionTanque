@@ -143,9 +143,10 @@ public class TanqueConValvulaVisual extends JPanel implements ActionListener {
             botonControlador.setBounds(60, 200, 50, 50);
             botonControlador.setContentAreaFilled(false);
             botonControlador.setBorderPainted(false);
-            botonControlador.addMouseListener(new MouseListener() {
+            botonControlador.setEnabled(false);
+            botonControlador.addActionListener(new ActionListener() {
                 @Override
-                public void mouseClicked(MouseEvent e) {
+                public void actionPerformed(ActionEvent e) {
                     int numero = 100; 
                     boolean valido = false; 
                     while (!valido)
@@ -163,25 +164,8 @@ public class TanqueConValvulaVisual extends JPanel implements ActionListener {
                     }
                     nivelAControlar = numero;
                     repaint();
-                }
+                }         
     
-                @Override
-                public void mousePressed(MouseEvent e) {
-                }
-    
-                @Override
-                public void mouseReleased(MouseEvent e) {
-                }
-    
-                @Override
-                public void mouseEntered(MouseEvent e) {
-                    botonControlador.setBackground(new Color(0x2ff238));
-                }
-    
-                @Override
-                public void mouseExited(MouseEvent e) {
-                    botonControlador.setBackground(Color.WHITE);
-                }
             });
     
             botonValvulaTanque = new JButton();
