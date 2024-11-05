@@ -351,7 +351,7 @@ public class TanqueConValvulaVisual extends JPanel implements ActionListener {
             //g2d.setColor(Color.getHSBColor(0.15f, 0.4f, 0.6f));
             g2d.setColor(Color.BLACK);
         g2d.drawLine(xTanque - 2, yTanque + 303-(ALTO_TANQUE*nivelAControlar/100)+delay, xTanque + 202, yTanque + 303-(ALTO_TANQUE*nivelAControlar/100)+delay); // Linea Derecha
-        g2d.drawLine(xTanque - 2, yTanque + 297-(ALTO_TANQUE*nivelAControlar/100)-delay, xTanque + 202, yTanque + 297-(ALTO_TANQUE*nivelAControlar/100)-delay); // Linea Derecha
+        g2d.drawLine(xTanque - 2, yTanque + 296-(ALTO_TANQUE*nivelAControlar/100)-delay, xTanque + 202, yTanque + 297-(ALTO_TANQUE*nivelAControlar/100)-delay); // Linea Derecha
 
 
         g2d.setColor(Color.BLACK);
