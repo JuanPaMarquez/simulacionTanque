@@ -24,11 +24,14 @@ public class TanqueConValvulaVisual extends JPanel implements ActionListener {
     public static boolean isIniciado=true;
     boolean subiendo = true;
     boolean subiendo2 = true;
-    int nivelAControlar = 70;
+    int nivelAControlar = 65;
     boolean cableArribaON = true;//cable conectado a valvula llenadp
     boolean cableAbajoON = false;//cable conectado a valvula vaciado
     private int levelAgua =0;
     private boolean isAutomatic=false; 
+    private int delay=6;
+
+
 
     boolean isFlowing = false;
     boolean hasFlowed = false;
@@ -87,7 +90,7 @@ public class TanqueConValvulaVisual extends JPanel implements ActionListener {
     // Boton de la valvula del tanque
     private JButton botonValvulaTanque;
     
-    private int delay=3;
+   
     
         public TanqueConValvulaVisual() {
            
@@ -350,8 +353,9 @@ public class TanqueConValvulaVisual extends JPanel implements ActionListener {
             //dibujar linea de nivel
             //g2d.setColor(Color.getHSBColor(0.15f, 0.4f, 0.6f));
             g2d.setColor(Color.BLACK);
-        g2d.drawLine(xTanque - 2, yTanque + 303-(ALTO_TANQUE*nivelAControlar/100)+delay, xTanque + 202, yTanque + 303-(ALTO_TANQUE*nivelAControlar/100)+delay); // Linea Derecha
-        g2d.drawLine(xTanque - 2, yTanque + 296-(ALTO_TANQUE*nivelAControlar/100)-delay, xTanque + 202, yTanque + 297-(ALTO_TANQUE*nivelAControlar/100)-delay); // Linea Derecha
+            int delay2 = delay +10 ;
+        g2d.drawLine(xTanque - 2, yTanque + ALTO_TANQUE-(ALTO_TANQUE*nivelAControlar/100)+(delay2), xTanque + 202, yTanque + ALTO_TANQUE-(ALTO_TANQUE*nivelAControlar/100)+(delay2)); // Linea Derecha
+        g2d.drawLine(xTanque - 2, yTanque + ALTO_TANQUE-(ALTO_TANQUE*nivelAControlar/100)-(delay2), xTanque + 202, yTanque + ALTO_TANQUE-(ALTO_TANQUE*nivelAControlar/100)-(delay2)); // Linea Derecha
 
 
         g2d.setColor(Color.BLACK);
@@ -494,7 +498,7 @@ public class TanqueConValvulaVisual extends JPanel implements ActionListener {
         this.botonValvulaTanque.setEnabled(false);
         //System.out.println("Automatizado2"+levelAgua);
        
-                if (levelAgua >= nivelAControlar+delay  && subiendo) {
+                if (levelAgua >= nivelAControlar+delay-1  && subiendo) {
                     this.cableArribaON=false;
                     this.cableAbajoON=true;
                     subiendo = false;
