@@ -452,12 +452,23 @@ public class TanqueConValvulaVisual extends JPanel implements ActionListener {
             isAutomatic=true;
             if (isIniciado) {
                 estadoValvulaTanque = EstadoValvulaTanque.ABIERTA;
-            estadoValvulaCasa = EstadoValvulaCasa.CERRADA;     
+                estadoValvulaCasa = EstadoValvulaCasa.CERRADA;     
             //System.out.println("Automatizado");
             isIniciado=false;  
+            this.cableAbajoON=false;
+            this.cableArribaON=true;
+            aguaH = 0;
+            vacioAguaH = 0;
+            aguaV = 0;
+           vacioAguaV = 0;
+            
             }
+            
           
             }else{
+                isIniciado=true;
+                this.cableAbajoON=false;
+                this.cableArribaON=false;
                 isAutomatic=false;
             }
 
