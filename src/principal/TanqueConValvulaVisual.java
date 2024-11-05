@@ -9,6 +9,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
+import java.io.EOFException;
 import java.text.DecimalFormat;
 import java.awt.event.MouseEvent;
 
@@ -78,6 +79,7 @@ public class TanqueConValvulaVisual extends JPanel implements ActionListener {
 
     // Botón de la válvula Casa
     private JButton botonValvulaCasa;
+    private JButton botonControlador;
 
     // Boton de la valvula del tanque
     private JButton botonValvulaTanque;
@@ -124,11 +126,60 @@ public class TanqueConValvulaVisual extends JPanel implements ActionListener {
             }
         });
 
+        botonControlador = new JButton();
+        botonControlador.setFocusable(false);
+        botonControlador.setForeground(Color.BLACK);
+        botonControlador.setBorder(BorderFactory.createLineBorder(Color.BLACK, 3));
+        botonControlador.setBorderPainted(true);
+        botonControlador.setBounds(60, 200, 50, 50);
+        botonControlador.setContentAreaFilled(false);
+        botonControlador.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                int numero = 0; 
+                boolean valido = false; 
+                while (!valido)
+                { 
+                    String input = JOptionPane.showInputDialog(null, "¿A que nivel tendras el tanque?:"); 
+                    try { 
+                        numero = Integer.parseInt(input); 
+                        if (numero >= 50 && numero <= 100) { valido = true; } 
+                        else { 
+                            JOptionPane.showMessageDialog(null, "Por favor, introduce un nivel válido entre 50 y 100."); 
+                        } 
+                    } catch (NumberFormatException err) { 
+                        JOptionPane.showMessageDialog(null, "Entrada no válida. Por favor, introduce un número."); 
+                    } 
+                }
+                nivelAControlar = numero;
+                repaint();
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                botonControlador.setBackground(new Color(0x2ff238));
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                botonControlador.setBackground(Color.WHITE);
+            }
+        });
+
         botonValvulaTanque = new JButton();
         botonValvulaTanque.setFocusable(false);
         botonValvulaTanque.setForeground(Color.BLACK);
         botonValvulaTanque.setBorder(BorderFactory.createLineBorder(Color.BLACK, 3));
         botonValvulaTanque.setMargin(new Insets(10, 10, 10, 10));
+        
         botonValvulaTanque.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -179,6 +230,7 @@ public class TanqueConValvulaVisual extends JPanel implements ActionListener {
         botonValvulaTanque.setContentAreaFilled(false);
         this.add(botonValvulaCasa);
         this.add(botonValvulaTanque);
+        this.add(botonControlador);
     }
 
     protected void paintComponentcuadricula(Graphics g1) {
@@ -292,10 +344,17 @@ public class TanqueConValvulaVisual extends JPanel implements ActionListener {
 
         int xControler=50;
         int yControler=100;
-        //controlador de nivel
         float[] dashPattern = {10, 10};
+        //controlador de nivel
         g2d.setStroke(new BasicStroke(2, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER, 10, dashPattern, 0));
         
+        //dibujar linea de nivel
+        g2d.setColor(Color.BLACK);
+        g2d.drawLine(xTanque - 2, yTanque + 302-(ALTO_TANQUE*nivelAControlar/100), xTanque + 202, yTanque + 302-(ALTO_TANQUE*nivelAControlar/100)); // Linea Derecha
+
+
+
+
         if (cableArribaON == true) {
             g2d.setColor(Color.GREEN);
         }
