@@ -1,4 +1,4 @@
-package opciones;
+package option;
 
 import javax.swing.*;
 import java.awt.*;

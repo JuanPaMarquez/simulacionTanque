@@ -1,4 +1,4 @@
-package opciones;
+package option;
 
 import java.awt.Color;
 import java.awt.Dimension;

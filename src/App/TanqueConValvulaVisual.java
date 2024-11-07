@@ -1,8 +1,8 @@
-package principal;
+package App;
 
 import javax.swing.*;
 
-import opciones.paneldeOpciones;
+import option.paneldeOpciones;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;

@@ -1,10 +1,10 @@
-package opciones;
+package option;
 
 import javax.swing.*;
 import java.awt.*;
 import javax.swing.border.Border;
 
-import principal.TanqueConValvulaVisual;
+import App.TanqueConValvulaVisual;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;

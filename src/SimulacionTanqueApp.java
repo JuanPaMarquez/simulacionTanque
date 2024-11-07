@@ -1,9 +1,9 @@
-import opciones.BarraWindow;
-import principal.TanqueConValvulaVisual;
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import javax.swing.JFrame;
+
+import App.TanqueConValvulaVisual;
+import option.BarraWindow;
 
 public class SimulacionTanqueApp {
 
