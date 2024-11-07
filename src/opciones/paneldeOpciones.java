@@ -45,11 +45,10 @@ public class paneldeOpciones extends JPanel {
         MouseListener EventsButtonInicio = new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-
                 botonInicio.setBackground(new Color(0x0cf204));
                 botonFinalizar.setBackground(new Color(0x6598a4));
                 botonInicio.setSelected(true);
-                TanqueConValvulaVisual.isIniciado=true;
+                TanqueConValvulaVisual.isIniciado = true;
             }
 
             @Override
