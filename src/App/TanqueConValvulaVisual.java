@@ -34,6 +34,7 @@ public class TanqueConValvulaVisual extends JPanel implements ActionListener {
     // Dimensiones del tanque
     private final int ANCHO_TANQUE = 200;
     private final int ALTO_TANQUE = 300;
+    private final int MAXIMO_ALTO_TANQUE = 290; // Intervalo de tiempo en milisegundos
     private final int INTERVALO = 1; // Intervalo de tiempo en milisegundos
 
     // Nivel de agua en porcentaje
@@ -260,7 +261,7 @@ public class TanqueConValvulaVisual extends JPanel implements ActionListener {
         // Dibujar el nivel de agua
         g2d.setColor(Color.BLUE);
 
-        int alturaAgua = (int) ((nivelAgua / 1000.0) * ALTO_TANQUE); // Nivel proporcional
+        int alturaAgua = (int) ((nivelAgua / 1000.0) * MAXIMO_ALTO_TANQUE); // Nivel proporcional
         levelAgua = (int) ((nivelAgua / 10));
 
         // System.out.println(alturaAgua);
@@ -275,7 +276,7 @@ public class TanqueConValvulaVisual extends JPanel implements ActionListener {
         g2d.setFont(fuenteInformacion);
 
         g2d.setColor(Color.BLACK);
-        DecimalFormat df = new DecimalFormat("#.00");
+        DecimalFormat df = new DecimalFormat("#");
         g2d.drawString("Nivel: " + df.format((nivelAgua / 10)) + "%", xTanque + 50, yTanque + ALTO_TANQUE + 30); // Texto
                                                                                                                  // debajo
         // del tanque
@@ -303,11 +304,11 @@ public class TanqueConValvulaVisual extends JPanel implements ActionListener {
         // dibujar linea de nivel
         g2d.setColor(Color.BLACK);
         int delay2 = delay + 10;
-        g2d.drawLine(xTanque - 2, yTanque + ALTO_TANQUE - (ALTO_TANQUE * nivelAControlar / 100) + (delay2),
-                xTanque + 202, yTanque + ALTO_TANQUE - (ALTO_TANQUE * nivelAControlar / 100) + (delay2)); // Linea
+        g2d.drawLine(xTanque - 2, yTanque + ALTO_TANQUE - (MAXIMO_ALTO_TANQUE * nivelAControlar / 100) + (delay2),
+                xTanque + 202, yTanque + ALTO_TANQUE - (MAXIMO_ALTO_TANQUE * nivelAControlar / 100) + (delay2)); // Linea
                                                                                                           // Derecha
-        g2d.drawLine(xTanque - 2, yTanque + ALTO_TANQUE - (ALTO_TANQUE * nivelAControlar / 100) - (delay2),
-                xTanque + 202, yTanque + ALTO_TANQUE - (ALTO_TANQUE * nivelAControlar / 100) - (delay2)); // Linea
+        g2d.drawLine(xTanque - 2, yTanque + ALTO_TANQUE - (MAXIMO_ALTO_TANQUE * nivelAControlar / 100) - (delay2),
+                xTanque + 202, yTanque + ALTO_TANQUE - (MAXIMO_ALTO_TANQUE * nivelAControlar / 100) - (delay2)); // Linea
                                                                                                           // Derecha
 
         g2d.setColor(Color.BLACK);
@@ -463,8 +464,11 @@ public class TanqueConValvulaVisual extends JPanel implements ActionListener {
 
                     aguaV = aguaV + 2;
 
-                } else if (nivelAgua < 970) {
+                } else if (nivelAgua < 1000 ) {
                     nivelAgua = nivelAgua + 0.4;// variable de control
+                    if (nivelAgua > 1000) {
+                        nivelAgua = 1000;
+                    }
                 }
 
             } else {

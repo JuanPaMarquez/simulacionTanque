@@ -42,7 +42,7 @@ public class RoundedButton extends JButton {
         });
 
         // Definir la acción del botón (minimizar o maximizar)
-        addActionListener(_ -> {
+        addActionListener( _ -> {
             if (esMinimizar) {
                 frame.setState(JFrame.ICONIFIED); // Minimizar la ventana
             } else {
