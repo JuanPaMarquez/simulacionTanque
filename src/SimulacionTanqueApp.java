@@ -13,7 +13,7 @@ public class SimulacionTanqueApp {
       TanqueConValvulaVisual panel = new TanqueConValvulaVisual();
       panel.setBackground(Color.white);
       frame.add(panel);
-      frame.setSize(800, 600); // Aumentar el tamaño para acomodar la tubería y la casa
+      frame.setSize(1100, 640); // Aumentar el tamaño para acomodar la tubería y la casa
       frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
       frame.setLocationRelativeTo(null); // Centrar la ventana
       frame.setUndecorated(true);

@@ -25,7 +25,7 @@ public class paneldeOpciones extends JPanel {
         panelmenu.setLayout(null);
 
         // ! Ubicacion del panel en la vetana principal
-        int ubicacionX = 450;
+        int ubicacionX = 750;
         int ubicacionY = 50;
         panelmenu.setBounds(ubicacionX, ubicacionY, 300, 150);
 
