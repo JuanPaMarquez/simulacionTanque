@@ -54,7 +54,7 @@ public class TanqueConValvulaVisual extends JPanel implements ActionListener {
 
     // dimensiones de tuberia
     private int xTuberia = 50;
-    private int yTuberia = 265;
+    private int yTuberia = 215;
 
 
     public void ImagenPanel() {
@@ -94,9 +94,9 @@ public class TanqueConValvulaVisual extends JPanel implements ActionListener {
         // Configura el botón de la válvula
         botonValvulaCasa = new JButton(); // Estado inicial: ABIERTA // Reducir márgenes para mejor ajuste
         botonValvulaCasa.setFocusable(false); // Evitar que el botón tome el foco
-        botonValvulaCasa.setBorderPainted(true);
+        botonValvulaCasa.setBorderPainted(false);
         botonValvulaCasa.setContentAreaFilled(false);
-        botonValvulaCasa.setBounds(632, 435, 50, 40);
+        botonValvulaCasa.setBounds(650, 485, 50, 40);
         botonValvulaCasa.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -176,8 +176,8 @@ public class TanqueConValvulaVisual extends JPanel implements ActionListener {
         // Configura el layout absoluto
         this.setLayout(null);
         // superior izquierda
-        botonValvulaTanque.setBounds(xTuberia + 40, yTuberia - 30, 50, 50);
-        botonValvulaTanque.setBorderPainted(true);
+        botonValvulaTanque.setBounds(xTuberia + 50, yTuberia - 30, 50, 50);
+        botonValvulaTanque.setBorderPainted(false);
         botonValvulaTanque.setContentAreaFilled(false);
         this.add(botonValvulaCasa);
         this.add(botonValvulaTanque);
@@ -225,7 +225,7 @@ public class TanqueConValvulaVisual extends JPanel implements ActionListener {
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
         // Coordenadas del tanque
-        int xTanque = 430;
+        int xTanque = 450;
         int yTanque = 215;
 
         // Dibujar el tanque
@@ -253,13 +253,13 @@ public class TanqueConValvulaVisual extends JPanel implements ActionListener {
         g2d.drawLine(xTuberia, yTuberia + 10, xTuberia + 50, yTuberia + 10); // Tuberia Línea inferior
 
         // Tuberia parte horizontal
-        g2d.drawLine(xTuberia + 80, yTuberia, xTuberia + 250, yTuberia); // Tuberia Línea superior
-        g2d.drawLine(xTuberia + 80, yTuberia + 10, xTuberia + 250, yTuberia + 10); // Tuberia Línea inferior
+        g2d.drawLine(xTuberia + 95, yTuberia, xTuberia + 250, yTuberia); // Tuberia Línea superior
+        g2d.drawLine(xTuberia + 95, yTuberia + 10, xTuberia + 250, yTuberia + 10); // Tuberia Línea inferior
 
-        int posc1=220;
+        int posc1=240;
          // Tuberia parte horizontal
-         g2d.drawLine(xTuberia +posc1+ 80, yTuberia, xTuberia+posc1 + 163, yTuberia); // Tuberia Línea superior
-         g2d.drawLine(xTuberia+posc1 + 80, yTuberia + 10, xTuberia+posc1 + 158, yTuberia + 10); // Tuberia Línea inferior
+         g2d.drawLine(xTuberia +posc1+60, yTuberia, xTuberia+posc1 + 163, yTuberia); // Tuberia Línea superior
+         g2d.drawLine(xTuberia+posc1 + 60, yTuberia + 10, xTuberia+posc1 + 158, yTuberia + 10); // Tuberia Línea inferior
         // Dibujar el nivel de agua
         g2d.setColor(Color.BLUE);
 
@@ -286,12 +286,12 @@ public class TanqueConValvulaVisual extends JPanel implements ActionListener {
         // Agua estatica
         int x1Agua = xTuberia;
         int y1Agua = yTuberia + 5;
-        int x2Agua = xTuberia + 80;
+        int x2Agua = xTuberia + 100;
         int y2Agua = yTuberia + 5;
         g2d.setStroke(new BasicStroke(5));
 
         g2d.setColor(Color.BLUE);
-        g2d.drawLine(x1Agua, y1Agua, 90, y2Agua);
+        g2d.drawLine(x1Agua, y1Agua, 100, y2Agua);
         if (!(vacioAguaH == aguaH && estadoValvulaTanque == EstadoValvula.CERRADA)) {
             g2d.setColor(Color.BLUE);
             g2d.drawLine(x2Agua + vacioAguaH, y1Agua, x2Agua + aguaH, y2Agua);
@@ -303,8 +303,8 @@ public class TanqueConValvulaVisual extends JPanel implements ActionListener {
         }
       
 
-        int xControler = 50;
-        int yControler = 100;
+        int xControler = 100;
+        int yControler = 200;
         float[] dashPattern = { 10, 10 };
         // controlador de nivel
         g2d.setStroke(new BasicStroke(1, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER, 10, dashPattern, 0));
@@ -329,21 +329,58 @@ public class TanqueConValvulaVisual extends JPanel implements ActionListener {
             g2d.setColor(Color.BLACK);
         }
 
-        g2d.drawLine(xControler + 35, yControler + 20, xControler + 35, yControler + 100); // Linea Derecha
+        g2d.drawLine(xControler + 25, yControler +20, xControler + 25, yControler + 100); // Linea Derecha
         if (cableAbajoON && isAutomatic) {
             g2d.setColor(Color.getHSBColor(0.25f, 0.8f, 0.8f));
         } else {
             g2d.setColor(Color.BLACK);
         }
-        g2d.drawLine(xControler + 35, yControler + 150, xControler + 35, yControler + 400); // Linea Derecha
-        g2d.drawLine(xControler + 35, yControler + 400, xControler + 358, yControler + 400); // Linea Derecha
-        g2d.drawLine(xControler + 358, yControler + 400, xControler + 358, yControler + 310); // Linea Derecha
+
+        g2d.drawLine( 325, yControler , 325, yControler - 100);
+        g2d.drawLine( 325, yControler-100 , 700, yControler - 100);
+       // g2d.drawLine( xControler + 725, yControler -50, xControler + 725, yControler + 280);
+
+        g2d.drawLine( xControler + 625, yControler -50, xControler + 625, yControler ); 
+        g2d.drawLine( xControler + 675, yControler -50, xControler + 675, yControler + 230); 
+        g2d.drawLine( xControler + 725, yControler -50, xControler + 725, yControler + 280); 
+       // g2d.drawLine(xControler + 651, yControler + 25, xControler + 750, yControler + 25); // Linea Derecha
+       // g2d.drawLine(xControler + 25, yControler + 400, xControler + 358, yControler + 400); // Linea Derecha
+       // g2d.drawLine(xControler + 358, yControler + 400, xControler + 358, yControler + 310); // Linea Derecha
 
         g2d.setColor(Color.BLACK);
         g2d.setStroke(new BasicStroke(3));
-        g2d.drawOval(xControler + 10, yControler + 100, 50, 50);
-        g2d.drawLine(xControler + 60, yControler + 125, xControler + 125, yControler + 125); // Linea Derecha
-        g2d.drawString("ST", xControler + 27, yControler + 130);
+        g2d.drawOval(xControler , yControler + 100, 50, 50);
+        g2d.drawLine(xControler + 50, yControler + 125, xControler + 200, yControler + 125); // Linea Derecha
+        g2d.drawString("LC", xControler + 17, yControler + 130);
+
+
+        g2d.drawOval(xControler + 200, yControler + 100, 50, 50);
+        g2d.drawLine(xControler + 250, yControler + 125, xControler + 349, yControler + 125); // Linea Derecha
+        g2d.drawString("LT", xControler + 17+200, yControler + 130);
+
+
+        g2d.drawOval(xControler + 600, yControler , 50, 50);
+        g2d.drawLine(xControler + 551, yControler + 25, xControler + 600, yControler + 25); // Linea Derecha
+        g2d.drawString("LTS1", xControler + 12+600, yControler + 30);
+
+        g2d.drawOval(xControler + 650, yControler + 230, 50, 50);
+        g2d.drawLine(xControler + 551, yControler + 255, xControler + 650, yControler + 255); // Linea Derecha
+        g2d.drawString("LTS2", xControler + 12+650, yControler +130+ 130);
+
+
+
+     
+        int xSguridad = 700;
+        int ySeguridad=50;
+        g2d.setColor(new Color(44, 62, 80));
+        g2d.fillRect(xSguridad,50,200,100);
+        g2d.setColor(Color.YELLOW);
+        g2d.drawRect(xSguridad,ySeguridad,200,100);
+        g2d.setColor(Color.WHITE);
+        g2d.drawString("SISTEMA DE SEGURIDAD",   12+xSguridad,  ySeguridad+ 25);
+        g2d.drawString("LÓGICA DE DISPARO",   12+xSguridad,  ySeguridad+ 75);
+        
+  
 
         g2d.setStroke(new BasicStroke(5));
 
@@ -358,9 +395,9 @@ public class TanqueConValvulaVisual extends JPanel implements ActionListener {
         }
 
         if (estadoValvulaTanque == EstadoValvula.ABIERTA) {
-            g2d.drawImage(this.valvulaA.getImage(), xTuberia+40 , yTuberia - 30, 50, 50, this);
+            g2d.drawImage(this.valvulaA.getImage(), xTuberia+50 , yTuberia - 30, 50, 50, this);
         } else {
-            g2d.drawImage(this.valvulaC.getImage(), xTuberia+40 , yTuberia - 30, 50, 50, this);
+            g2d.drawImage(this.valvulaC.getImage(), xTuberia+50 , yTuberia - 30, 50, 50, this);
         }
 
         if (estadoValSeguridadTanque == EstadoValvula.ABIERTA) {

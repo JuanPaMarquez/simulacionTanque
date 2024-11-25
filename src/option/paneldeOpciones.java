@@ -25,9 +25,9 @@ public class paneldeOpciones extends JPanel {
         panelmenu.setLayout(null);
 
         // ! Ubicacion del panel en la vetana principal
-        int ubicacionX = 750;
-        int ubicacionY = 50;
-        panelmenu.setBounds(ubicacionX, ubicacionY, 300, 150);
+        int ubicacionX = 25;
+        int ubicacionY = 25;
+        panelmenu.setBounds(ubicacionX, ubicacionY, 250, 150);
 
         ButtonGroup comunicacion = new ButtonGroup();
         // ! Creacion de los elementos del menu
@@ -125,20 +125,20 @@ public class paneldeOpciones extends JPanel {
 
         // ! ubicación de los checkBox del menu
         int alturaestados = 100;
-        automatizado.setBounds(160, alturaestados, 120, 20);
+        automatizado.setBounds(135, alturaestados, 120, 20);
         automatizado.setFocusable(false);
-        manual.setBounds(40, alturaestados, 80, 20);
+        manual.setBounds(15, alturaestados, 80, 20);
         manual.setFocusable(false);
 
         // ! Ubicación de los botones de inicio y finalizacion
         int alturabotones = 60;
-        botonInicio.setBounds(40, alturabotones, 80, 20);
+        botonInicio.setBounds(15, alturabotones, 80, 20);
         botonInicio.setFocusable(false);
-        botonFinalizar.setBounds(160, alturabotones, 100, 20);
+        botonFinalizar.setBounds(135, alturabotones, 100, 20);
         botonFinalizar.setFocusable(false);
 
         // ! Ubicacion de la etiqueta
-        Titulomenu.setBounds(70, 20, 160, 20);
+        Titulomenu.setBounds(45, 20, 160, 20);
         // ! Implementación de los elementos al panel
         panelmenu.add(Titulomenu);
         panelmenu.add(botonInicio);
