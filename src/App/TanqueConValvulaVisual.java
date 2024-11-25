@@ -54,7 +54,7 @@ public class TanqueConValvulaVisual extends JPanel implements ActionListener {
 
     // dimensiones de tuberia
     private int xTuberia = 50;
-    private int yTuberia = 165;
+    private int yTuberia = 265;
 
 
     public void ImagenPanel() {
@@ -96,7 +96,7 @@ public class TanqueConValvulaVisual extends JPanel implements ActionListener {
         botonValvulaCasa.setFocusable(false); // Evitar que el botón tome el foco
         botonValvulaCasa.setBorderPainted(true);
         botonValvulaCasa.setContentAreaFilled(false);
-        botonValvulaCasa.setBounds(382, 385, 50, 40);
+        botonValvulaCasa.setBounds(632, 435, 50, 40);
         botonValvulaCasa.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -226,7 +226,7 @@ public class TanqueConValvulaVisual extends JPanel implements ActionListener {
 
         // Coordenadas del tanque
         int xTanque = 430;
-        int yTanque = 165;
+        int yTanque = 215;
 
         // Dibujar el tanque
         int[] xTriangulo = { xTanque - 2, xTanque + 101, xTanque + 202 }; // Coordenadas X de los puntos del triángulo
@@ -292,10 +292,16 @@ public class TanqueConValvulaVisual extends JPanel implements ActionListener {
 
         g2d.setColor(Color.BLUE);
         g2d.drawLine(x1Agua, y1Agua, 90, y2Agua);
-        if (!(vacioAguaH == aguaH && estadoValSeguridadTanque == EstadoValvula.CERRADA)) {
+        if (!(vacioAguaH == aguaH && estadoValvulaTanque == EstadoValvula.CERRADA)) {
             g2d.setColor(Color.BLUE);
             g2d.drawLine(x2Agua + vacioAguaH, y1Agua, x2Agua + aguaH, y2Agua);
+            if (!(vacioAguaH == aguaH && estadoValSeguridadTanque == EstadoValvula.CERRADA)) {
+                g2d.setColor(Color.BLUE);
+                g2d.drawLine(x2Agua + vacioAguaH, y1Agua, x2Agua + aguaH, y2Agua);
+            } 
+
         }
+      
 
         int xControler = 50;
         int yControler = 100;
