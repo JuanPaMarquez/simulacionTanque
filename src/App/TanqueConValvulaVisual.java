@@ -477,6 +477,8 @@ public class TanqueConValvulaVisual extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
 
         if (llamar.automatizado.isSelected()) {
+            this.estadoValSeguridadTanque=EstadoValvula.ABIERTA;
+            this.estadoValSeguridadCasa=EstadoValvula.ABIERTA;
             isAutomatic = true;
             if (isIniciado) {
                 if (subiendo) {
