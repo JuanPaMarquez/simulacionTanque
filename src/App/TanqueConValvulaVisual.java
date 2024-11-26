@@ -535,6 +535,10 @@ public class TanqueConValvulaVisual extends JPanel implements ActionListener {
             this.botonValvulaCasa.setEnabled(true);
             this.botonValvulaTanque.setEnabled(true);
 
+
+        }
+
+        
         if ((nivelAgua / 10) >=90 ) {
             this.estadoValSeguridadTanque=EstadoValvula.CERRADA;
         }else{
@@ -544,8 +548,6 @@ public class TanqueConValvulaVisual extends JPanel implements ActionListener {
             this.estadoValSeguridadCasa=EstadoValvula.CERRADA;
         }else{
             this.estadoValSeguridadCasa=EstadoValvula.ABIERTA;
-        }
-
         }
 
         if (llamar.botonInicio.isSelected() == true) {
